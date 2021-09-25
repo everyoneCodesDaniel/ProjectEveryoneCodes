@@ -38,7 +38,7 @@ body {
     padding-right: 14px;
 }
 
-#registrieren {
+#registrieren, #player, #logout {
     float: right;
     margin-left: -50%;
     margin-top: 2em;
@@ -47,11 +47,7 @@ body {
     padding-right: 14px;
 }
 
-#about {
-    color: white;
-}
-
-#help {
+#about, #help, #player, #history, #rang, p {
     color: white;
 }
 
@@ -59,31 +55,44 @@ body {
 </style>  
 </head>
 
-<body>
+<body onload="checkplayer()">
 
 <div id="homepage">
 
-    <button id="login">Log In</button><br><br>
+    <button id="login"><a href="/login.html">Log In</a></button>
+    <p id="player" hidden></p><br><br>
     <button id="registrieren"><a href="/registrieren.html">Sign Up</a></button>
+    <button id="logout" onclick="logoutplayer()" hidden>Log out</button>
 
-    <h2 class="text">Blablahihi</h2>
+    <h2 class="text">Abandoned</h2>
     <h3 class="text">The game</h3><br><br>
 
-    <button class="button" id="start" onclick="startGame()">Start</button><br><br>
-    <button class="button" id="history" onclick="showHistory()">History</button><br><br>
-    <button class="button" id="rang" onclick="showScore()">Rangliste</button><br><br>
-    <button class="button" id="hilfe" onclick="showHelp()">Hilfe</button><br><br>
+    <button class="button" id="start"><a href="/game.html">Start</a></button><br><br>
+    <button class="button" id="historybutton" onclick="showHistory()">History</button><br><br>
+    <button class="button" id="rangbutton" onclick="showScore()">Ranking</button><br><br>
+    <button class="button" id="hilfe" onclick="showHelp()">Help</button><br><br>
     <button class="button" id="aboutbutton" onclick="displayAbout()">About</button><br><br>
 
     <p>Please note: Sign up to save your runs and get the possibility to show former runs. 
         Otherwise your run will be saved as unknown user.</p> 
 
 </div>
-<div id="about" hidden>
-    <h2>About</h2>
+
+<div id="history" hidden>
+    <h2>History</h2>
     <div>
-        <h3>Welcome to our little Browsergame!</h3>
-        <p>This game was developed by Daniel Schiefer and Aymara Cortez Espinoza for their final project. We hope you enjoy! &#127918</p>
+        <h3>Here you can see what you did in your last playthrough:</h3>
+        <p>...</p>
+
+        <button id="back" onclick="displayStart()">Back to start</button>
+    </div>
+</div>
+
+<div id="rang" hidden>
+    <h2>Ranking</h2>
+    <div>
+        <h3>Here you can see where you are in the ranking:</h3>
+        <p>...</p>
 
         <button id="back" onclick="displayStart()">Back to start</button>
     </div>
@@ -97,30 +106,95 @@ body {
     </div>
 </div>
 
+<div id="about" hidden>
+    <h2>About</h2>
+    <div>
+        <h3>Welcome to our little Browsergame!</h3>
+        <p>This game was developed by Daniel Schiefer and Aymara Cortez Espinoza for their final project. We hope you enjoy! &#127918</p>
+
+        <button id="back" onclick="displayStart()">Back to start</button>
+    </div>
+</div>
+
 <script>
+    
+
+
+function logoutplayer() {
+    player = null;
+    document.getElementById('login').hidden = false;
+    document.getElementById('player').hidden = true;
+    document.getElementById('registrieren').hidden = false;
+    document.getElementById('logout').hidden = true;
+    sessionStorage.clear(); 
+
+    let url = new URL(window.location.origin + '/logout');
+        fetch(url, 
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        })
+}
+
+function checkplayer() {
+    let player = null || sessionStorage.getItem("player");
+    if (player !== null) {
+        document.getElementById('player').innerHTML = 'Logged in as: ' + player;
+        document.getElementById('login').hidden = true;
+        document.getElementById('player').hidden = false;
+        document.getElementById('registrieren').hidden = true;
+        document.getElementById('logout').hidden = false;
+    } else {
+        document.getElementById('login').hidden = false;
+        document.getElementById('player').hidden = true;
+        document.getElementById('registrieren').hidden = false;
+        document.getElementById('logout').hidden = true;
+    }
+}
 
 function displayAbout() {
     document.getElementById('homepage').hidden = true;
     document.getElementById('about').hidden = false;
     document.getElementById('help').hidden = true;
+    document.getElementById('history').hidden = true;
+    document.getElementById('rang').hidden = true;
 }
 
 function displayStart() {
     document.getElementById('homepage').hidden = false;
     document.getElementById('about').hidden = true;
     document.getElementById('help').hidden = true;
+    document.getElementById('history').hidden = true;
+    document.getElementById('rang').hidden = true;
 }
 
 function startGame() {}
 
-function showHistory() {}
+function showHistory() {
+    document.getElementById('history').hidden = false;
+    document.getElementById('homepage').hidden = true;
+    document.getElementById('about').hidden = true;
+    document.getElementById('help').hidden = true;
+    document.getElementById('rang').hidden = true;
+}
 
-function showScore() {}
+function showScore() {
+    document.getElementById('rang').hidden = false;
+    document.getElementById('history').hidden = true;
+    document.getElementById('homepage').hidden = true;
+    document.getElementById('about').hidden = true;
+    document.getElementById('help').hidden = true;
+}
 
 function showHelp() {
     document.getElementById('homepage').hidden = true;
     document.getElementById('about').hidden = true;
     document.getElementById('help').hidden = false;
+    document.getElementById('history').hidden = true;
+    document.getElementById('rang').hidden = true;
 }
 
 </script>

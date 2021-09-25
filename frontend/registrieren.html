@@ -17,7 +17,7 @@ body {
     background-image: linear-gradient(to bottom right, #0021A7, #AB0092);
 }
 
-.text {
+.text, #welcome, p {
     color: white;
 }
 
@@ -85,7 +85,7 @@ async function submitData() {
     console.log(password2)
 
     if (password === password2) {
-        await fetch('/project/submitData', {
+        let response = await fetch('/project/submitData', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -93,8 +93,12 @@ async function submitData() {
                 method: "POST",
                 body: JSON.stringify({username: username, password: password})
             });
+            if (response.status === 200) {
+                document.getElementById('welcome').innerHTML = 'Welcome, ' + username + '!'
+            } else {
+                document.getElementById('welcome').innerHTML = 'Something went wrong...'
+            }
         
-        document.getElementById('welcome').innerHTML = 'Welcome, ' + username + '!'
     } else {    
         document.getElementById('welcome').innerHTML = 'Passwords do not match! Please try again.'
     }
