@@ -35,7 +35,7 @@ body {
 
 <body>
 
-<div>
+<div style="margin-top: 100px;">
     <form id="form">
         <label class="text" for="username">Username: </label>
         <input type="text" name="username" id="username"><br><br>
@@ -43,9 +43,10 @@ body {
         <input type="password" name="password" id="password">
         <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i><br><br>
         <button type="button" name="submit" id="submit" onclick="loginplayer()">Submit</button><br><br>
+    </form>
         <div id="welcome"></div><br>
         <button type="button" id="back" ><a href="/index.html">Back to start</a></button>
-    </form>
+
 </div>
 
 <script>
@@ -67,7 +68,7 @@ async function loginplayer() {
     let password = document.getElementById('password').value;
     console.log(password)
 
-        let response = await fetch('/project/loginplayer', {
+        let result = await fetch('/project/loginplayer', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -75,12 +76,20 @@ async function loginplayer() {
                 method: "POST",
                 body: JSON.stringify({username: username, password: password})
             });
-        console.log(response)
-        if (response.status === 200) {
-            document.getElementById('welcome').innerHTML = 'Welcome, ' + username + '! To start the game, please return to the homepage'
+
+            let data = await result.json();
+        
+        if (data.message === 'ok') {
+            document.getElementById("welcome").style.color = "white";
+            document.getElementById('form').hidden = true;
+            document.getElementById('welcome').innerHTML = 'Welcome, ' + username + '! To start the game, please return to the homepage.'
             sessionStorage.setItem("player", username);
-        } else {
-            document.getElementById('welcome').innerHTML = 'Something went wrong...'
+        } else if (data.message === 'wrong') {
+            document.getElementById("welcome").style.color = "red";
+            document.getElementById('welcome').innerHTML = 'Wrong username!'
+        } else if (data.message === 'false') {
+            document.getElementById("welcome").style.color = "red";
+            document.getElementById('welcome').innerHTML = 'Wrong password!'
         }
 }
 
