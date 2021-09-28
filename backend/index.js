@@ -35,39 +35,57 @@ connection.connect((err) => {
 const dbQuery = util.promisify(connection.query).bind(connection);
 
 app.post("/project/submitData", (req, res) => {
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-        connection.query("insert into personen (username,password) values (?,?)",
-        [req.body.username, hash],
-        (err, result) => {
-            if(err) throw err;
-            console.log("created a new user with id ", result.insertId);
-            res.json({result});
+    connection.query("SELECT username FROM personen where username=?",
+        [req.body.username],
+        (err, rows) => {
+            if (err) throw err;
+            console.log(rows)
+            if (rows.length >= 1) {
+                res.json({message: 'used'});
+            } else {
+                bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+                    connection.query("insert into personen (username,password) values (?,?)",
+                        [req.body.username, hash],
+                        (err, result) => {
+                            if (err) throw err;
+                            console.log("created a new user with id ", result.insertId);
+                            res.json({message: 'inserted'});
+                        });
+                });
+            }
         });
-    });
 });
 
 app.post("/project/loginplayer", async (req, res) => {
     let hash;
     await dbQuery('SELECT password FROM personen where username=?', [req.body.username]).then(rows => {
-        hash = rows[0].password
-        bcrypt.compare(req.body.password, hash, function (err, result) {
-            connection.query("SELECT * FROM personen where username=? and password=?", [req.body.username, hash],
-                (err, rows) => {
-                    if (err) throw err;
-                    if (rows.length == 1) {
-                        console.log("login ok!");
-                        req.session.user = {
-                            id: rows[0].personId,
-                            name: rows[0].username,
-                        };
-                        console.log(req.session.user)
-                        res.json({rows});
-                    } else {
-                        res.status(401).send("Wrong username or password!");
-                    }
+        console.log(rows)
+        if (rows.length === 0) {
+            res.json({ message: 'wrong' });
+        } else {
+            console.log(rows[0].password)
+            hash = rows[0].password
+            bcrypt.compare(req.body.password, hash, function (err, result) {
+                if (result === false) {
+                    res.json({ message: 'false' });
+                } else {
+                    connection.query("SELECT * FROM personen where username=? and password=?", [req.body.username, hash],
+                        (err, rows) => {
+                            if (err) throw err;
+                            if (rows.length === 1) {
+                                console.log("login ok!");
+                                req.session.user = {
+                                    id: rows[0].personId,
+                                    name: rows[0].username,
+                                };
+                                console.log(req.session.user)
+                                res.json({ message: 'ok' });
+                            }
+                        }
+                    );
                 }
-            );
-        });
+            });
+        }
     });
 });
 
