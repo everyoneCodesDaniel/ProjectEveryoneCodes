@@ -12,17 +12,53 @@
 <div id="canvas"></div>
 
 <div id="inventory">
-    <h3 style="text-align: center;">Inventory:</h3>
+    <h3 style="text-align: center;">Inventory</h3>
+    <img class="picleft" src="/img/key1.png" onclick="javascript:functionone()">   
+    <img class="picright"><br>
+    <span class="spanleft">hi</span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br><br><br>
+<div id="help">
+    <h3 style="text-align: center;">Help</h3>
+    <span class="left">look</span>
+    <span class="right">north/n</span><br><br>
+    <span class="left">pickup</span>
+    <span class="right">south/s</span><br><br>
+    <span class="left">use</span>
+    <span class="right">east/e</span><br><br>
+    <span class="left">talk</span>
+    <span class="right">west/w</span>
+</div>
 </div>
 
 <div id="input">
-<h3>Input</h3>
+<h3 style="color: white;">Input</h3>
 <div class="chat-container" id="chatWindow">
 </div>
 <div class="send-container" id="send-container">
-    <form action="javascript:sendMessage(chatInput);">
+    <form action="">
         <input type="text" name="chatInput" id="chatInput" style="width: 223px; font-size:20px" autocomplete="off">
-        <input type="submit" value="send" style="font-size:20px">
+        <input class="button" type="submit" value="send" style="font-size:20px">
     </form>
 </div>
 <p id="invalidInput" hidden>Not a valid input!</p>

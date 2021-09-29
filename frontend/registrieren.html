@@ -21,21 +21,20 @@ body {
     color: white;
 }
 
-.button {
-    width: 30%;
+button {
+    width: fit-content;
     padding: 5px 5px;
     font-family: Monaco, monospace;
     font-weight: bold;
     font-size: medium;
 }
 
-
 </style>  
 </head>
 
 <body>
 
-<div>
+<div style="margin-top: 100px;">
     <form id="form">
         <label class="text" for="username">Username: </label>
         <input type="text" name="username" id="username"><br><br>
@@ -46,10 +45,10 @@ body {
         <input type="password" name="password2" id="password2">
         <i class="far fa-eye" id="togglePassword2" style="margin-left: -30px; cursor: pointer;"></i><br><br>
         <button type="button" name="submit" id="submit" onclick="submitData()">Submit</button><br><br>
+    </form>     
         <div id="welcome"></div><br>
         <button type="button" id="back" ><a href="/index.html">Back to start</a></button>
         <p>Please note: After subscribing you have to log in on the homepage.</p>
-    </form>
 </div>
 
 <script>
@@ -84,8 +83,11 @@ async function submitData() {
     let password2 = document.getElementById('password2').value;
     console.log(password2)
 
-    if (password === password2) {
-        let response = await fetch('/project/submitData', {
+    if (username.length === 0 || password.length === 0 || password2.length === 0) {
+        document.getElementById("welcome").style.color = "red";
+        document.getElementById('welcome').innerHTML = "Fields can't be empty!"
+    } else if (password === password2) {
+        let result = await fetch('/project/submitData', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -93,18 +95,22 @@ async function submitData() {
                 method: "POST",
                 body: JSON.stringify({username: username, password: password})
             });
-            if (response.status === 200) {
+            let data = await result.json();
+            console.log(data)
+
+            if (data.message === 'inserted') {
+                document.getElementById("welcome").style.color = "white";
+                document.getElementById('form').hidden = true;
                 document.getElementById('welcome').innerHTML = 'Welcome, ' + username + '!'
-            } else {
-                document.getElementById('welcome').innerHTML = 'Something went wrong...'
+            } else if (data.message === 'used'){
+                document.getElementById("welcome").style.color = "red";
+                document.getElementById('welcome').innerHTML = 'Username already taken. <br> Please choose another one.'
             }
-        
-    } else {    
+    } else if (password !== password2) {    
+        document.getElementById("welcome").style.color = "red";
         document.getElementById('welcome').innerHTML = 'Passwords do not match! Please try again.'
     }
 }
-
-
 </script>
 
 </body>
