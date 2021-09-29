@@ -64,29 +64,37 @@ h2 {
     margin-left: 60px;
 }
 
-#invalidInput {
-    color: red;
+.left {
+    padding-left: 30px;
 }
 
-.picleft {    
-    width: 32px;     
-    height: 32px;     
-    margin-left: 60px; 
-}  
-
-.picright {     
-    width: 32px;     
-    height: 32px;     
-    margin-right: 60px;     
-    float: right; 
+.right {
+    padding-right: 30px;
+    float: right;
 }
 
+.picleft {
+    width: 32px;
+    height: 32px;
+    margin-left: 60px;
+}
 
+.picright {
+    width: 32px;
+    height: 32px;
+    margin-right: 60px;
+    float: right;
+}
 
+.spanleft {
+    float: left;
+    padding-left: 60px;
+}
 
-
-
-
+.spanright {
+    float: right;
+    padding-right: 77px;
+}
 
 
 
