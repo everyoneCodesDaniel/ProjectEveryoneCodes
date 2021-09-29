@@ -29,7 +29,6 @@ button {
     font-size: medium;
 }
 
-
 </style>  
 </head>
 
@@ -46,7 +45,6 @@ button {
     </form>
         <div id="welcome"></div><br>
         <button type="button" id="back" ><a href="/index.html">Back to start</a></button>
-
 </div>
 
 <script>
@@ -67,7 +65,6 @@ async function loginplayer() {
     console.log(username)
     let password = document.getElementById('password').value;
     console.log(password)
-
     if (username.length === 0 || password.length === 0) {
         document.getElementById("welcome").style.color = "red";
         document.getElementById('welcome').innerHTML = "Fields can't be empty!"

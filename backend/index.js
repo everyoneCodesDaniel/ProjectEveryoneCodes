@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const session = require('express-session');
 
-
 // parse HTTP POST Data 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); // accept json data
@@ -15,13 +14,13 @@ app.use(express.json()); // accept json data
 // put client-side code (html/css/js) in the frontend folder
 app.use(express.static(__dirname + '/../frontend'));
 
+// User login status
 app.use(session({
     secret: 'keyboard cat', 
     cookie: { secure: true},
     resave: true,
     saveUninitialized: true}
 ));
-
 
 connection = mysql.createConnection(dbconfig.dbSettings);
 connection.connect((err) => {
