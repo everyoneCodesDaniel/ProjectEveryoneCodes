@@ -8,7 +8,7 @@ create table rangliste (
 create table personen (
   personId int primary key auto_increment,
   username VARCHAR(50) DEFAULT 'unknown',
-  password VARCHAR(50) DEFAULT NULL
+  password VARCHAR(100) DEFAULT NULL
 );
 
 create table durchläufe (

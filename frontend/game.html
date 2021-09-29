@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Browsergame</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////AD09PRo+Pj4MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+Pj4MPj49Gv///wAAAAAAMDAwVS0tLc4rKyv+LCws7jU1NSoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0NDQqLCws7isrK/4tLS3OMTExVCsrK/AqKir/Kysr/ysrK/8uLi6qAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALi4uqisrK/8rKyv/Kioq/ywsLPAsLCzjKioq/zIyMv9UVFT/NTU1/DQzMy8tLS0KLS0tCi0tLQotLS0KMzMzLzk5OfxQUFD/LS0t/ysqKv8sLCzjLS0tni4uLv9PT0//8fHx/1VVVf8uLi79Ly8v/DQ0NPw0NDT8Ly8v/DAwMP1vb2///////z8/P/8tLS3/Li4tnjAwMFdtbW3/+fn5/7i4uP/7+/v/dHR0/39/f//9/f3//Pz8/4KCgv+dnZ3//////6mpqf//////U1NT/zAvL1dAQEAUQ0ND+3Fxcf/9/f3/c3Nz/0VFRf9IR0z/Y1iI/1iHaf9ITkr/TU1N/5WVlf//////dnZ2/zw8PPs9PT0U////AC0tLcc8PDz/hISE/0BAQP8rKir/Kyor/ysqLv8qLiv/Kisr/ysqKv9MTEz/oqKi/zIyMv8tLS3H////AAAAAAA0MzNKQEBA/z09Pf89PT3/LS0t3iwsLNssLCzbLCws2ywsLNsvLy/jPT09/z09Pf8+Pj76MzMzRQAAAAAAAAAA////AI+PjzyUlJRDkJCQPnl5eQIAAAAAAAAAAAAAAAAAAAAAeHh4BpOTkkGUlJRDjo6ONAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD//wAAj/EAAAfgAAAH4AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAg8MAAP//AAD//wAA//8AAA==" rel="icon" type="image/x-icon">
+
+<style>
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Monaco, monospace;
+    background-image: linear-gradient(to bottom right, #0021A7, #AB0092);
+}
+
+.text {
+    color: white;
+}
+
+.button {
+    width: fit-content;
+    padding: 5px 5px;
+    font-family: Monaco, monospace;
+    font-weight: bold;
+    font-size: medium;
+}
+
+h2 {
+    color: white;
+    text-align: right;
+}
+
+.chat-container {
+    margin-left: auto; 
+    margin-right: 0;
+    width: 300px;
+    height: 620px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.send-container {
+    text-align: right;
+    margin-top: 5px;
+}
+
+#canvas {
+    border:1px solid #000000;
+    width: 720px;
+    height: 720px;
+    float: left;
+    margin-left: 20px;
+}
+
+#input {
+    float: left;
+    margin-left: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#inventory {
+    float: left;
+    height: 720px;
+    width: 300px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white;
+    margin-left: 60px;
+}
+
+.left {
+    padding-left: 30px;
+}
+
+.right {
+    padding-right: 30px;
+    float: right;
+}
+
+.picleft {
+    width: 32px;
+    height: 32px;
+    margin-left: 60px;
+}
+
+.picright {
+    width: 32px;
+    height: 32px;
+    margin-right: 60px;
+    float: right;
+}
+
+.spanleft {
+    float: left;
+    padding-left: 60px;
+}
+
+.spanright {
+    float: right;
+    padding-right: 77px;
+}
+
+</style>  
+</head>
+
+<canvas id="canvas"></canvas>
+
+<div id="inventory">
+    <h3 style="text-align: center;">Inventory</h3>
+    <img class="picleft" src="/img/key1.png" onclick="javascript:functionone()">   
+    <img class="picright"><br>
+    <span class="spanleft">hi</span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br><br><br>
+<div id="help">
+    <h3 style="text-align: center;">Help</h3>
+    <span class="left">look</span>
+    <span class="right">north/n</span><br><br>
+    <span class="left">pickup</span>
+    <span class="right">south/s</span><br><br>
+    <span class="left">use</span>
+    <span class="right">east/e</span><br><br>
+    <span class="left">talk</span>
+    <span class="right">west/w</span>
+</div>
+</div>
+
+<div id="input">
+<h3 style="color: white;">Input</h3>
+<div class="chat-container" id="chatWindow">
+</div>
+<div class="send-container" id="send-container">
+    <form action="">
+        <input type="text" name="chatInput" id="chatInput" style="width: 223px; font-size:20px" autocomplete="off">
+        <input class="button" type="submit" value="send" style="font-size:20px">
+    </form>
+</div>
+</div>
+
+<script>
+
+function functionone() {
+    document.getElementById('chatWindow').innerText = "Hello!"
+}
+
+</script>
+
+</body>
+</html>
