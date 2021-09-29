@@ -21,8 +21,8 @@ body {
     color: white;
 }
 
-.button {
-    width: 30%;
+button {
+    width: fit-content;
     padding: 5px 5px;
     font-family: Monaco, monospace;
     font-weight: bold;
@@ -85,7 +85,10 @@ async function submitData() {
     let password2 = document.getElementById('password2').value;
     console.log(password2)
 
-    if (password === password2) {
+    if (username.length === 0 || password.length === 0 || password2.length === 0) {
+        document.getElementById("welcome").style.color = "red";
+        document.getElementById('welcome').innerHTML = "Fields can't be empty!"
+    } else if (password === password2) {
         let result = await fetch('/project/submitData', {
                 headers: {
                     'Accept': 'application/json',
@@ -106,7 +109,7 @@ async function submitData() {
                 document.getElementById("welcome").style.color = "red";
                 document.getElementById('welcome').innerHTML = 'Username already taken. <br> Please choose another one.'
             }
-    } else {    
+    } else if (password !== password2) {    
         document.getElementById("welcome").style.color = "red";
         document.getElementById('welcome').innerHTML = 'Passwords do not match! Please try again.'
     }

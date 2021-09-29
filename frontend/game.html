@@ -21,7 +21,7 @@ body {
 }
 
 .button {
-    width: 30%;
+    width: fit-content;
     padding: 5px 5px;
     font-family: Monaco, monospace;
     font-weight: bold;
@@ -72,15 +72,82 @@ h2 {
     margin-left: 60px;
 }
 
+.left {
+    padding-left: 30px;
+}
+
+.right {
+    padding-right: 30px;
+    float: right;
+}
+
+.picleft {
+    width: 32px;
+    height: 32px;
+    margin-left: 60px;
+}
+
+.picright {
+    width: 32px;
+    height: 32px;
+    margin-right: 60px;
+    float: right;
+}
+
+.spanleft {
+    float: left;
+    padding-left: 60px;
+}
+
+.spanright {
+    float: right;
+    padding-right: 77px;
+}
+
 </style>  
 </head>
 
 <canvas id="canvas"></canvas>
 
 <div id="inventory">
-    <h3 style="text-align: center;">Inventory:</h3>
+    <h3 style="text-align: center;">Inventory</h3>
+    <img class="picleft" src="/img/key1.png" onclick="javascript:functionone()">   
+    <img class="picright"><br>
+    <span class="spanleft">hi</span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br>
+    <img class="picleft">
+    <img class="picright"><br>
+    <span class="spanleft"></span>
+    <span class="spanright"></span>
+    <br><br><br><br>
+<div id="help">
+    <h3 style="text-align: center;">Help</h3>
+    <span class="left">look</span>
+    <span class="right">north/n</span><br><br>
+    <span class="left">pickup</span>
+    <span class="right">south/s</span><br><br>
+    <span class="left">use</span>
+    <span class="right">east/e</span><br><br>
+    <span class="left">talk</span>
+    <span class="right">west/w</span>
 </div>
-
+</div>
 
 <div id="input">
 <h3 style="color: white;">Input</h3>
@@ -89,12 +156,16 @@ h2 {
 <div class="send-container" id="send-container">
     <form action="">
         <input type="text" name="chatInput" id="chatInput" style="width: 223px; font-size:20px" autocomplete="off">
-        <input type="submit" value="send" style="font-size:20px">
+        <input class="button" type="submit" value="send" style="font-size:20px">
     </form>
 </div>
 </div>
 
 <script>
+
+function functionone() {
+    document.getElementById('chatWindow').innerText = "Hello!"
+}
 
 </script>
 

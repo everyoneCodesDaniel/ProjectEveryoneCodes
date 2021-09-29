@@ -21,7 +21,7 @@ body {
     color: white;
 }
 
-.button {
+button {
     width: 30%;
     padding: 5px 5px;
     font-family: Monaco, monospace;
@@ -51,6 +51,14 @@ body {
     color: white;
 }
 
+.button2 {
+    width: fit-content;
+    padding: 5px 5px;
+    font-family: Monaco, monospace;
+    font-weight: bold;
+    font-size: medium;
+}
+
 
 </style>  
 </head>
@@ -59,19 +67,19 @@ body {
 
 <div id="homepage">
 
-    <button id="login"><a href="/login.html">Log In</a></button>
+    <button class="button2" id="login"><a href="/login.html">Log In</a></button>
     <p id="player" hidden></p><br><br>
-    <button id="registrieren"><a href="/registrieren.html">Sign Up</a></button>
-    <button id="logout" onclick="logoutplayer()" hidden>Log out</button>
+    <button class="button2" id="registrieren"><a href="/registrieren.html">Sign Up</a></button>
+    <button class="button2" id="logout" onclick="logoutplayer()" hidden>Log out</button>
 
     <h2 class="text">Abandoned</h2>
     <h3 class="text">The game</h3><br><br>
 
-    <button class="button" id="start"><a href="/game.html">Start</a></button><br><br>
-    <button class="button" id="historybutton" onclick="showHistory()">History</button><br><br>
-    <button class="button" id="rangbutton" onclick="showScore()">Ranking</button><br><br>
-    <button class="button" id="hilfe" onclick="showHelp()">Help</button><br><br>
-    <button class="button" id="aboutbutton" onclick="displayAbout()">About</button><br><br>
+    <button id="start"><a href="/game.html">Start</a></button><br><br>
+    <button id="historybutton" onclick="showHistory()">History</button><br><br>
+    <button id="rangbutton" onclick="showScore()">Ranking</button><br><br>
+    <button id="hilfe" onclick="showHelp()">Help</button><br><br>
+    <button id="aboutbutton" onclick="displayAbout()">About</button><br><br>
 
     <p>Please note: Sign up to save your runs and get the possibility to show former runs. 
         Otherwise your run will be saved as unknown user.</p> 
@@ -84,7 +92,7 @@ body {
         <h3>Here you can see what you did in your last playthrough:</h3>
         <p>...</p>
 
-        <button id="back" onclick="displayStart()">Back to start</button>
+        <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
 
@@ -94,7 +102,7 @@ body {
         <h3>Here you can see where you are in the ranking:</h3>
         <p>...</p>
 
-        <button id="back" onclick="displayStart()">Back to start</button>
+        <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
 
@@ -102,7 +110,7 @@ body {
     <h2>How to play:</h2>
     <div>
         <p>Hier wird eine Anleitung stehen</p>
-        <button id="back" onclick="displayStart()">Back to start</button>
+        <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
 
@@ -112,7 +120,7 @@ body {
         <h3>Welcome to our little Browsergame!</h3>
         <p>This game was developed by Daniel Schiefer and Aymara Cortez Espinoza for their final project. We hope you enjoy! &#127918</p>
 
-        <button id="back" onclick="displayStart()">Back to start</button>
+        <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
 
