@@ -1,8 +1,11 @@
 create table rangliste (
   id int primary key auto_increment,
   personId int not NULL,
-  constraint ranking foreign key (personId) REFERENCES personen (personId)
-
+  durchlaufid int not NULL,
+  zuganzahl int DEFAULT 0,
+  score int DEFAULT 0,
+  constraint ranking foreign key (personId) REFERENCES personen (personId),
+  constraint durchlauf foreign key (durchlaufid) REFERENCES durchläufe (id)
 );
 
 create table personen (
@@ -14,16 +17,18 @@ create table personen (
 create table durchläufe (
 id int primary key auto_increment,
 ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('gewonnen', 'verloren')),
-zuganzahl int DEFAULT NULL,
+zuganzahl int DEFAULT 0,
 personId int not NULL,
 constraint durchlauf foreign key (personId) REFERENCES personen (personId)
 );
 
 create table details (
 zuganzahl int primary key auto_increment,
-aktion VARCHAR (50) DEFAULT NULL,
-ereignis VARCHAR (50) DEFAULT NULL,
-richtung VARCHAR (10) DEFAULT NULL check (ergebnis in ('nord', 'ost', 'süd', 'west')),
+look VARCHAR(1) DEFAULT NULL,
+pickup VARCHAR(1) DEFAULT NULL,
+apply VARCHAR(1) DEFAULT NULL,
+talk VARCHAR(1) DEFAULT NULL,
+richtung VARCHAR (10) DEFAULT NULL,
+position VARCHAR(20) not NULL,
 durchlaufid int not NULL,
-constraint details foreign key (durchlaufid) REFERENCES durchläufe (id)
-);
+constraint details foreign key (durchlaufid) REFERENCES durchläufe(id))
