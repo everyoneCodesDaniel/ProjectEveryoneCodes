@@ -1,0 +1,100 @@
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Monaco, monospace;
+    background-image: linear-gradient(to bottom right, #0021A7, #AB0092);
+}
+
+.text {
+    color: white;
+}
+
+.button {
+    padding: 5px 5px;
+    font-family: Monaco, monospace;
+    font-weight: bold;
+    font-size: medium;
+}
+
+h2 {
+    color: white;
+    text-align: right;
+}
+
+.chat-container {
+    margin-left: auto; 
+    margin-right: 0;
+    width: 300px;
+    height: 620px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.send-container {
+    text-align: right;
+    margin-top: 5px;
+}
+
+#canvas {
+    border:1px solid #000000;
+    width: 720px;
+    height: 720px;
+    float: left;
+    margin-left: 20px;
+}
+
+#input {
+    float: left;
+    margin-left: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#inventory {
+    float: left;
+    height: 720px;
+    width: 300px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white;
+    margin-left: 60px;
+}
+
+.left {
+    padding-left: 30px;
+}
+
+.right {
+    padding-right: 30px;
+    float: right;
+}
+
+.picleft {
+    width: 32px;
+    height: 32px;
+    margin-left: 60px;
+}
+
+.picright {
+    width: 32px;
+    height: 32px;
+    margin-right: 60px;
+    float: right;
+}
+
+.spanleft {
+    float: left;
+    padding-left: 60px;
+}
+
+.spanright {
+    float: right;
+    padding-right: 77px;
+}
+
+
+
+

@@ -29,7 +29,6 @@ button {
     font-size: medium;
 }
 
-
 </style>  
 </head>
 
@@ -50,7 +49,6 @@ button {
         <div id="welcome"></div><br>
         <button type="button" id="back" ><a href="/index.html">Back to start</a></button>
         <p>Please note: After subscribing you have to log in on the homepage.</p>
-
 </div>
 
 <script>
@@ -85,7 +83,7 @@ async function submitData() {
     let password2 = document.getElementById('password2').value;
     console.log(password2)
 
-    if (username.length === 0 || password.length === 0 || password2.length === 0) {
+    if (username.trim().length === 0 || password.trim().length === 0 || password2.trim().length === 0) {
         document.getElementById("welcome").style.color = "red";
         document.getElementById('welcome').innerHTML = "Fields can't be empty!"
     } else if (password === password2) {
@@ -97,7 +95,6 @@ async function submitData() {
                 method: "POST",
                 body: JSON.stringify({username: username, password: password})
             });
-
             let data = await result.json();
             console.log(data)
 
@@ -114,7 +111,6 @@ async function submitData() {
         document.getElementById('welcome').innerHTML = 'Passwords do not match! Please try again.'
     }
 }
-
 </script>
 
 </body>

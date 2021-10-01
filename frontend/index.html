@@ -59,7 +59,6 @@ button {
     font-size: medium;
 }
 
-
 </style>  
 </head>
 
@@ -72,17 +71,18 @@ button {
     <button class="button2" id="registrieren"><a href="/registrieren.html">Sign Up</a></button>
     <button class="button2" id="logout" onclick="logoutplayer()" hidden>Log out</button>
 
+
     <h2 class="text">Abandoned</h2>
     <h3 class="text">The game</h3><br><br>
 
-    <button id="start"><a href="/game.html">Start</a></button><br><br>
+    <button id="start"><a href="/game.html" onclick="startGame()">Start</a></button><br><br>
     <button id="historybutton" onclick="showHistory()">History</button><br><br>
     <button id="rangbutton" onclick="showScore()">Ranking</button><br><br>
     <button id="hilfe" onclick="showHelp()">Help</button><br><br>
     <button id="aboutbutton" onclick="displayAbout()">About</button><br><br>
 
     <p>Please note: Sign up to save your runs and get the possibility to show former runs. 
-        Otherwise your run will be saved as unknown user.</p> 
+        Otherwise the details of your run can't be saved.</p> 
 
 </div>
 
@@ -101,7 +101,6 @@ button {
     <div>
         <h3>Here you can see where you are in the ranking:</h3>
         <p>...</p>
-
         <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
@@ -125,8 +124,22 @@ button {
 </div>
 
 <script>
-    
 
+let player;
+    
+function startGame() {
+    if (player !== null) {
+        let url = new URL(window.location.origin + '/startgame/' + player);
+        fetch(url, 
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "PUT"
+        })
+    }
+}
 
 function logoutplayer() {
     player = null;
@@ -148,7 +161,7 @@ function logoutplayer() {
 }
 
 function checkplayer() {
-    let player = null || sessionStorage.getItem("player");
+    player = null || sessionStorage.getItem("player");
     if (player !== null) {
         document.getElementById('player').innerHTML = 'Logged in as: ' + player;
         document.getElementById('login').hidden = true;
@@ -178,8 +191,6 @@ function displayStart() {
     document.getElementById('history').hidden = true;
     document.getElementById('rang').hidden = true;
 }
-
-function startGame() {}
 
 function showHistory() {
     document.getElementById('history').hidden = false;
