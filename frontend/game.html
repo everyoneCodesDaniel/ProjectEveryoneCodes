@@ -53,12 +53,14 @@
 
 <div id="input">
 <h3 style="color: white;">Input</h3>
+<button class="button" id="exit"><a href="/index.html" onclick="exitGame()">Exit</a></button>
+<button class="button" id="won"><a href="/index.html" onclick="wonGame()">Won</a></button>
 <div class="chat-container" id="chatWindow">
 </div>
 <div class="send-container" id="send-container">
     <form action="javascript:sendMessage(chatInput)">
-        <input type="text" name="chatInput" id="chatInput" style="width: 223px; font-size:20px" autocomplete="off">
-        <input class="button" type="submit" value="send" style="font-size:20px">
+        <input type="text" name="chatInput" id="chatInput" style="width: 220px; font-size:20px" autocomplete="off">
+        <input class="button" type="submit" value="send" style="font-size:20px; width: fit-content">
     </form>
 </div>
 <p id="invalidInput" hidden>Not a valid input!</p>
@@ -69,7 +71,7 @@
 <script>
 
     username = sessionStorage.getItem("player") || "guest";
-    let x = 3, y = 3;
+    var x = 3, y = 3;
     document.getElementById("X").innerHTML = x;
     document.getElementById("Y").innerHTML = y;
     var container = document.getElementById('canvas');
@@ -94,21 +96,25 @@
                 document.getElementById("Y").innerHTML = y;
                 drawPlayerLocation();
                 checkCellPath();
+                updatedb(input);
             } 
             else if (input == "south" || input == "s") {
                 y = clamp(y+1, 1, 6);
                 document.getElementById("Y").innerHTML = y;
                 drawPlayerLocation();
+                updatedb(input);
             }
             else if (input == "east" || input == "e") {
                 x = clamp(x+1, 1, 6);
                 document.getElementById("X").innerHTML = x;
                 drawPlayerLocation();
+                updatedb(input);
             }
             else if (input == "west" || input == "w") {
                 x = clamp(x-1, 1, 6);
                 document.getElementById("X").innerHTML = x;
                 drawPlayerLocation();
+                updatedb(input);
             }
             else {
                 document.getElementById('invalidInput').hidden = false;
@@ -179,6 +185,93 @@
     function clearTo() {
         canvas.context.clearRect(0, 0, canvas.node.width, canvas.node.height);
     };
+
+    function exitGame() {
+        console.log("exit");
+        player = null || sessionStorage.getItem("player")
+        if (player !== null) {
+        var url = new URL(window.location.origin + '/exitgame');
+        console.log("exit2");
+        fetch(url, 
+            {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "PUT"
+            })
+            console.log("exit3");
+        }
+    };
+
+    function wonGame() {
+        console.log("won");
+        player = null || sessionStorage.getItem("player")
+        if (player !== null) {
+        var url = new URL(window.location.origin + '/wongame');
+        console.log("won2");
+        fetch(url, 
+            {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "PUT"
+            })
+        }
+    }
+
+    function updatedb(input) {
+        console.log(input)
+        player = null || sessionStorage.getItem("player")
+        if (player !== null) {
+            if (input == "north" || input == "n") {
+                let url = new URL(window.location.origin + '/direction/north');
+                fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PUT",
+                    body: JSON.stringify({x: x, y: y})
+                    })
+            } else if (input == "south" || input == "s") {
+                let url = new URL(window.location.origin + '/direction/south');
+                fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PUT",
+                    body: JSON.stringify({x: x, y: y})
+                    })
+            } else if (input == "east" || input == "e") {
+                let url = new URL(window.location.origin + '/direction/east');
+                fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PUT",
+                    body: JSON.stringify({x: x, y: y})
+                    })
+            } else if (input == "west" || input == "w") {
+                let url = new URL(window.location.origin + '/direction/west');
+                fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PUT",
+                    body: JSON.stringify({x: x, y: y})
+                    })
+            }
+        }
+    }
 
 </script>
 <script src="cellDetails.js"></script>
