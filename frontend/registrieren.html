@@ -83,7 +83,7 @@ async function submitData() {
     let password2 = document.getElementById('password2').value;
     console.log(password2)
 
-    if (username.length === 0 || password.length === 0 || password2.length === 0) {
+    if (username.trim().length === 0 || password.trim().length === 0 || password2.trim().length === 0) {
         document.getElementById("welcome").style.color = "red";
         document.getElementById('welcome').innerHTML = "Fields can't be empty!"
     } else if (password === password2) {
