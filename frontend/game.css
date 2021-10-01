@@ -1,4 +1,3 @@
-
 html {
     height: 100%;
 }
@@ -92,9 +91,16 @@ h2 {
 
 .spanright {
     float: right;
-    padding-right: 77px;
+    padding-right: 60px;
 }
 
+.gameMap {
+    position:absolute;
+    z-index:-2;
+}
 
-
+.mapCover {
+    position:absolute;
+    z-index:-1;
+}
 
