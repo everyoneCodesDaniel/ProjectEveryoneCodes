@@ -9,40 +9,86 @@
 
 </head>
 
-<div id="canvas"></div>
+<div id="canvas">
+    <img class="gameMap" src="/img/Abandoned_Map.png" >
+
+    <img class="mapCover" id="X1/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 0px">
+    <img class="mapCover" id="X2/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 120px">
+    <img class="mapCover" id="X3/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 240px">
+    <img class="mapCover" id="X4/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 360px">
+    <img class="mapCover" id="X5/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 480px">
+    <img class="mapCover" id="X6/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 600px">
+
+    <img class="mapCover" id="X1/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 0px">
+    <img class="mapCover" id="X2/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 120px">
+    <img class="mapCover" id="X3/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 240px">
+    <img class="mapCover" id="X4/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 360px">
+    <img class="mapCover" id="X5/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 480px">
+    <img class="mapCover" id="X6/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 600px">
+
+    <img class="mapCover" id="X1/Y3" src="/img/Cover.png" style="vertical-align:middle;margin:240px 0px">
+    <img class="mapCover" id="X2/Y3" src="/img/Cover.png" style="vertical-align:middle;margin:240px 120px">
+    <!-----------------------------------Startposition---X3/Y3-------------------------------------------->
+    <img class="mapCover" id="X3/Y3" src="/img/Cover.png" style="vertical-align:middle;margin:240px 240px" hidden>
+    <!-----------------------------------Startposition---X3/Y3-------------------------------------------->   
+    <img class="mapCover" id="X4/Y3" src="/img/Cover.png" style="vertical-align:middle;margin:240px 360px">
+    <img class="mapCover" id="X5/Y3" src="/img/Cover.png" style="vertical-align:middle;margin:240px 480px">
+    <img class="mapCover" id="X6/Y3" src="/img/Cover.png" style="vertical-align:middle;margin:240px 600px">
+
+    <img class="mapCover" id="X1/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 0px">
+    <img class="mapCover" id="X2/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 120px">
+    <img class="mapCover" id="X3/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 240px">
+    <img class="mapCover" id="X4/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 360px">
+    <img class="mapCover" id="X5/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 480px">
+    <img class="mapCover" id="X6/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 600px">
+
+    <img class="mapCover" id="X1/Y5" src="/img/Cover.png" style="vertical-align:middle;margin:480px 0px">
+    <img class="mapCover" id="X2/Y5" src="/img/Cover.png" style="vertical-align:middle;margin:480px 120px">
+    <img class="mapCover" id="X3/Y5" src="/img/Cover.png" style="vertical-align:middle;margin:480px 240px">
+    <img class="mapCover" id="X4/Y5" src="/img/Cover.png" style="vertical-align:middle;margin:480px 360px">
+    <img class="mapCover" id="X5/Y5" src="/img/Cover.png" style="vertical-align:middle;margin:480px 480px">
+    <img class="mapCover" id="X6/Y5" src="/img/Cover.png" style="vertical-align:middle;margin:480px 600px">
+
+    <img class="mapCover" id="X1/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 0px">
+    <img class="mapCover" id="X2/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 120px">
+    <img class="mapCover" id="X3/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 240px">
+    <img class="mapCover" id="X4/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 360px">
+    <img class="mapCover" id="X5/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 480px">
+    <img class="mapCover" id="X6/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 600px">
+</div>
 
 <div id="inventory">
     <h3 style="text-align: center;">Inventory</h3>
-    <img class="picleft" src="/img/key1.png" onclick="javascript:functionone()">   
-    <img class="picright"><br>
-    <span class="spanleft">hi</span>
-    <span class="spanright"></span>
+    <img class="picleft" id="rustyKey" src="/img/rustyKey.png" onclick="chatInput.value += ' rustyKey '" hidden>   
+    <img class="picright" id="doll" src="/img/doll.png" onclick="chatInput.value += ' doll '" hidden><br>
+    <span class="spanleft" id="rustyKeytext" hidden>RustyKey</span>
+    <span class="spanright" id="dollText" hidden>Doll</span>
     <br><br>
-    <img class="picleft">
-    <img class="picright"><br>
-    <span class="spanleft"></span>
-    <span class="spanright"></span>
+    <img class="picleft" id="key3" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden>
+    <img class="picright" id="key4" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden><br>
+    <span class="spanleft" id="key3text" hidden>Key</span>
+    <span class="spanright" id="key4text" hidden>Key</span>
     <br><br>
-    <img class="picleft">
-    <img class="picright"><br>
-    <span class="spanleft"></span>
-    <span class="spanright"></span>
+    <img class="picleft" id="key5" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden>
+    <img class="picright" id="key6" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden><br>
+    <span class="spanleft" id="key5text" hidden>Key</span>
+    <span class="spanright" id="key6text" hidden>Key</span>
     <br><br>
-    <img class="picleft">
-    <img class="picright"><br>
-    <span class="spanleft"></span>
-    <span class="spanright"></span>
+    <img class="picleft" id="key7" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden>
+    <img class="picright" id="key8" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden><br>
+    <span class="spanleft" id="key7text" hidden>Key</span>
+    <span class="spanright" id="key8text" hidden>Key</span>
     <br><br>
-    <img class="picleft">
-    <img class="picright"><br>
-    <span class="spanleft"></span>
-    <span class="spanright"></span>
+    <img class="picleft" id="key9" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden>
+    <img class="picright" id="key10" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden><br>
+    <span class="spanleft" id="key9text" hidden>Key</span>
+    <span class="spanright" id="key10text" hidden>Key</span>
     <br><br><br><br>
 <div id="help">
     <h3 style="text-align: center;">Help</h3>
     <span class="left">look</span>
     <span class="right">north/n</span><br><br>
-    <span class="left">pickup</span>
+    <span class="left">pick up</span>
     <span class="right">south/s</span><br><br>
     <span class="left">use</span>
     <span class="right">east/e</span><br><br>
@@ -53,71 +99,117 @@
 
 <div id="input">
 <h3 style="color: white;">Input</h3>
-<div class="chat-container" id="chatWindow">
-</div>
+<div class="chat-container" id="chatWindow"></div>
 <div class="send-container" id="send-container">
-    <form action="">
+    <form action="javascript:sendMessage(chatInput)">
         <input type="text" name="chatInput" id="chatInput" style="width: 223px; font-size:20px" autocomplete="off">
         <input class="button" type="submit" value="send" style="font-size:20px">
     </form>
 </div>
-<p id="invalidInput" hidden>Not a valid input!</p>
 <p id="coordinates">X = <span id="X"></span>  Y = <span id="Y"></span></p>
+<button type="button" onclick="uncover()">Uncover</button>
+<button type="button" onclick="test()">Test</button>
 </div>
-<img class="picleft" src="/img/Abandoned_Map.png"> 
 
 <script>
-
+    //------------------Initialisation--------------------->
     username = sessionStorage.getItem("player") || "guest";
-    let x = 3, y = 3;
+    var x = 3, y = 3, input;
+    var items = [], events = [], npc = [];
+    generateEvents();
+    var saveInput = new Boolean("true");
+    var pathOK = new Boolean("false");
+    var validUse = new Boolean("false"); 
     document.getElementById("X").innerHTML = x;
     document.getElementById("Y").innerHTML = y;
     var container = document.getElementById('canvas');
     initCanvas(container);
+    //----------------------------------------------------->
 
     function clamp(number, min, max) {
         return Math.max(min, Math.min(number, max));
     }
 
     function sendMessage(chatInput) {
-        let input = chatInput.value.toLowerCase();
-        if (chatInput.value.trim().length > 0) {
-            if (chatInput.value.startsWith("/")) {
-                let msg = chatInput.value;
-                var chatWindow = document.getElementById("chatWindow");
-                chatWindow.innerHTML = "<p><b>" +
-                    "<i> " + username + ": </i></b>" +
-                    msg + "</p>" + chatWindow.innerHTML;
+        if (saveInput) {
+            input = chatInput.value.toLowerCase().trim();
+            var chatWindow = document.getElementById("chatWindow");
+            if (chatInput.value.trim().length > 0) {
+                var msg = chatInput.value;
+                input = input.split(" ");
+                if (chatInput.value.startsWith("/")) {
+                    chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML +
+                        "<i> " + username + ": </i></b>" +
+                        msg + "</p>";
+                }
+                else if (input.includes("north") || input.includes("n")) {
+                    input = "north";
+                    cellAction();
+                } 
+                else if (input.includes("south") || input.includes("s")) {
+                    input = "south";
+                    cellAction();
+                }
+                else if (input.includes("east") || input.includes("e")) {
+                    input = "east";
+                    cellAction();
+                }
+                else if (input.includes("west") || input.includes("w")) {
+                    input = "west";
+                    cellAction();
+                }
+                else if (input == "look") {           
+                    cellAction();
+                    drawEventLocation();
+                }
+                else if (input == "pick up" || input == "pickup") {    
+                    input = "pickup";      
+                    cellAction();
+                    drawPlayerLocation()
+                }
+                else if (input[0] == "use" || input[1] == "use") {   
+                    validUse = false;
+                    for (let i = 0; i <= items.length-1; i++) {
+                        if (input[0] == items[i][0] && items[i][2] == true) {
+                            console.log("Input1: " + i);
+                            input[0] = items[i][0];
+                            validUse = true;
+                            break;
+                        } else if (input[1] == items[i][0] && items[i][2] == true) {
+                            console.log("Input2: " + i);
+                            input[1] = items[i][0];
+                            validUse = true;
+                            break;
+                        }
+                    }
+                    if (validUse) {
+                        console.log("Cellaction");
+                        cellAction();
+                    } else {
+                        incorrectInput();
+                    }
+                    
+                }
+                else if (input == "talk") {           
+                    items[0][1] = true;
+                }
+                //Incorrect Input!
+                else {
+                    incorrectInput();
+                }
             }
-            else if (input == "north" || input == "n") {
-                y = clamp(y-1, 1, 6);
-                document.getElementById("Y").innerHTML = y;
-                drawPlayerLocation();
-                checkCellPath();
-            } 
-            else if (input == "south" || input == "s") {
-                y = clamp(y+1, 1, 6);
-                document.getElementById("Y").innerHTML = y;
-                drawPlayerLocation();
-            }
-            else if (input == "east" || input == "e") {
-                x = clamp(x+1, 1, 6);
-                document.getElementById("X").innerHTML = x;
-                drawPlayerLocation();
-            }
-            else if (input == "west" || input == "w") {
-                x = clamp(x-1, 1, 6);
-                document.getElementById("X").innerHTML = x;
-                drawPlayerLocation();
-            }
-            else {
-                document.getElementById('invalidInput').hidden = false;
-                setTimeout(function() {
-                    document.getElementById('invalidInput').hidden = true;
-                }, 1000);
-            }
-            chatInput.value = "";
         }
+    }
+    function incorrectInput() {
+        var blockMessage = "Not a valid input!";
+        chatInput.value = "";
+        var reserve = chatWindow.innerHTML;
+        chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + "Warning" + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+        saveInput = !saveInput;
+        setTimeout(function() {
+            chatWindow.innerHTML = reserve;
+            saveInput = !saveInput;
+        }, 1000);
     }
 
     function drawPlayerLocation() {
@@ -126,9 +218,43 @@
         let pointX = (canvas.node.width / 6 ) * x - cellCenter;
         let pointY = (canvas.node.height / 6 ) * y - cellCenter;
         let radius = 15;
-        let circlefillColor = '#3f888f';
+        let circlefillColor = '#00008B';
         fillCircle(pointX, pointY, radius, circlefillColor);
+        document.getElementById('X'+x+'/'+'Y'+y).hidden = true;
+        drawEventLocation();
         drawGrid();
+    }
+
+    function drawEventLocation() {
+        let cellCenter = 90;
+        let eventX, eventY, radius;
+        let circlefillColor;
+
+        //----------------------------Items-------------------------->
+        if (items[0][1] && document.getElementById('rustyKey').hidden == true) { //Key1
+            eventX = (canvas.node.width / 6 ) * 1 - cellCenter;
+            eventY = (canvas.node.height / 6 ) * 3 - cellCenter;
+            circlefillColor = '#FFD700'; 
+            radius = 10;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        if (events[0][1] && document.getElementById('doll').hidden == true) { //doll
+            eventX = (canvas.node.width / 6 ) * 2 - 60;
+            eventY = (canvas.node.height / 6 ) * 3 - 95;
+            circlefillColor = '#FFD700'; 
+            radius = 10;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        //---------------------------Events-------------------------->
+        if (!events[0][1] && document.getElementById('X2/Y3').hidden == true) { //chest
+            eventX = (canvas.node.width / 6 ) * 2 - 60;
+            eventY = (canvas.node.height / 6 ) * 3 - 95;
+            circlefillColor = '#964B00'; 
+            radius = 15;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        //----------------------------NPCs--------------------------->
+        
     }
 
     function createCanvas(parent) {
@@ -178,6 +304,35 @@
 
     function clearTo() {
         canvas.context.clearRect(0, 0, canvas.node.width, canvas.node.height);
+    };
+
+    function generateEvents() {
+        //-----------------Items-------------------->
+        //----["NAME", looked?, picked up?, used?]--->
+        items.push(["key", false, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        items.push(["doll", true, false, false]);
+        //----------------Events-------------------->
+        //----["NAME", used?]--->
+        events.push(["chest", false]);
+        events.push(["chest", false]);
+        events.push(["chest", false]);
+        events.push(["chest", false]);
+        events.push(["chest", false]);
+        events.push(["chest", false]);
+        events.push(["chest", false]);
+        //-----------------NPCs--------------------->
+        npc.push(["girl", false]);
+        npc.push(["girl", false]);
+        npc.push(["girl", false]);
+        npc.push(["girl", false]);
     };
 
 </script>

@@ -1,4 +1,3 @@
-
 html {
     height: 100%;
 }
@@ -64,30 +63,44 @@ h2 {
     margin-left: 60px;
 }
 
-#invalidInput {
-    color: red;
+.left {
+    padding-left: 30px;
 }
 
-.picleft {    
-    width: 32px;     
-    height: 32px;     
-    margin-left: 60px; 
-}  
-
-.picright {     
-    width: 32px;     
-    height: 32px;     
-    margin-right: 60px;     
-    float: right; 
+.right {
+    padding-right: 30px;
+    float: right;
 }
 
+.picleft {
+    width: 32px;
+    height: 32px;
+    margin-left: 60px;
+}
 
+.picright {
+    width: 32px;
+    height: 32px;
+    margin-right: 60px;
+    float: right;
+}
 
+.spanleft {
+    float: left;
+    padding-left: 60px;
+}
 
+.spanright {
+    float: right;
+    padding-right: 60px;
+}
 
+.gameMap {
+    position:absolute;
+    z-index:-2;
+}
 
-
-
-
-
-
+.mapCover {
+    position:absolute;
+    z-index:-1;
+}
