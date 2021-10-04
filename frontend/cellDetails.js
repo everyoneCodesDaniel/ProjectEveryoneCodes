@@ -7,11 +7,11 @@ function cellAction() {
         if (input == "look") {
             if (!items[4][3]) { //---Red-Orb-Altar--->
                 let blockMessage = "Here is an altar with a circular indentation. There is something written on it.";
-                let altarMessage = "The carminred artefact will guide your way!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("red") + "</p>";
+                let altarMessage = " The carminred artefact will guide your way!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("red") + "</p>";
             } else {
                 let blockMessage = "I already put the red orb in the circular indentation.";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             }
         }
         if (input == "pickup") {
@@ -19,10 +19,15 @@ function cellAction() {
 
             } else { nothingToPickup(); }
         }
-        if (input == "use") {
-            if (false) {
-
-            } else { nothingToPickup(); }
+        if (input[0] == "use" &&  input[1] == "redorb" || input[0] == "redorb" && input[1] == "use") { //---Use-RedOrb--->
+            if (items[4][2] && !items[4][3]) {
+                items[4][3] = true;
+                events[4][1] = true;
+                document.getElementById('redOrb').src='/img/redOrb_used.png';
+                let blockMessage = "I put the red orb on the altar. It starts glowing!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                drawEventLocation()
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
@@ -35,14 +40,14 @@ function cellAction() {
         if (input == "look") {
             if (!items[5][2]) { //---Green-Orb--->
                 let blockMessage = "There is a green orb on the ground!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
             if (!items[5][2]) {//---Green-Orb--->
                 items[5][2] = true;
-                document.getElementById('greenorb').hidden = false;
-                document.getElementById('greenorbtext').hidden = false;
+                document.getElementById('greenOrb').hidden = false;
+                document.getElementById('greenOrbText').hidden = false;
                 confirm("You got a green orb!");
             } else { nothingToPickup(); }
         }
@@ -106,17 +111,17 @@ function cellAction() {
     if ( x == 5 && y == 1) {
         passableDir_W();
         if (input == "look") {
-            if (!items[7][1] && !items[7][2]) { //---Shield--->
+            if (!items[7][2]) { //---Shield--->
                 items[7][1] = true;
                 let blockMessage = "There is a shield on the ground!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
             if (!items[7][2]) {//---Shield--->
                 items[7][2] = true;
                 document.getElementById('shield').hidden = false;
-                document.getElementById('shieldtext').hidden = false;
+                document.getElementById('shieldText').hidden = false;
                 confirm("You got a shield!");
             } else { nothingToPickup(); }
         }
@@ -136,11 +141,11 @@ function cellAction() {
         if (input == "look") {
             if (!items[5][3]) { //---Green-Orb-Altar--->
                 let blockMessage = "Here is an altar with a circular indentation. There is something written on it.";
-                let altarMessage = "The leafgreen artefact will guide your way!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("green") + "</p>";
+                let altarMessage = " The leafgreen artefact will guide your way!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("green") + "</p>";
             } else {
                 let blockMessage = "I already put the green orb in the circular indentation.";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             }
         }
         if (input == "pickup") {
@@ -148,10 +153,15 @@ function cellAction() {
 
             } else { nothingToPickup(); }
         }
-        if (input == "use") {
-            if (false) {
-
-            } else { nothingToPickup(); }
+        if (input[0] == "use" &&  input[1] == "greenorb" || input[0] == "greenorb" && input[1] == "use") { //---Use-GreenOrb--->
+            if (items[5][2] && !items[5][3]) {
+                items[5][3] = true;
+                events[5][1] = true;
+                document.getElementById('greenOrb').src='/img/greenOrb_used.png';
+                let blockMessage = "I put the green orb on the altar. It starts glowing!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                drawEventLocation()
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
@@ -187,8 +197,9 @@ function cellAction() {
     if ( x == 2 && y == 2) {
         passableDir_NEW();
         if (input == "look") {
-            let blockMessage = "A big tree. In front of it is a red puddle";
-            chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+            if (false) {
+
+            } else { nothingToLook(); }
         }
         if (input == "pickup") {
             if (false) {
@@ -255,19 +266,25 @@ function cellAction() {
     if ( x == 5 && y == 2) {
         passableDir_SW();
         if (input == "look") {
-            if (false) {
-
-            } else { nothingToLook(); }
+            let blockMessage = "A big tree. In front of it is a red puddle.";
+            chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
         }
         if (input == "pickup") {
             if (false) {
 
             } else { nothingToPickup(); }
         }
-        if (input == "use") {
-            if (false) {
-
-            } else { nothingToPickup(); }
+        if (input[0] == "use" &&  input[1] == "bottle" || input[0] == "bottle" && input[1] == "use") { //---Use-Bottle-on-Tree--->
+            if (items[3][2] && !items[3][3]) {
+                items[3][3] = true;
+                items[9][2] = true;
+                events[1][1] = true;
+                document.getElementById('bottle').src='/img/redLiquid.png';
+                document.getElementById('bottleText').textContent="RedLiquid";
+                let blockMessage = "I filled the bottle with the red liquid.";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                drawEventLocation()
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
@@ -303,10 +320,11 @@ function cellAction() {
     if ( x == 1 && y == 3) {
         passableDir_NE();
         if (input == "look") {
-            if (!items[0][1] && !items[0][2]) { //---RustyKey--->
+            if (!items[0][2]) { //---RustyKey--->
                 items[0][1] = true;
                 let blockMessage = "There is a key on the ground!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                lookDB = true;
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
@@ -328,7 +346,6 @@ function cellAction() {
             } else { noTalk(); }
         }
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------>
     if ( x == 2 && y == 3) {
         passableDir_EW();
         if (input == "look") {
@@ -350,7 +367,7 @@ function cellAction() {
                 events[0][1] = true;
                 document.getElementById('rustyKey').src='/img/rustyKey_used.png';
                 let blockMessage = "I opened the chest with the key! There is a doll inside!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
             } else { cannotUse(); }
         }
@@ -360,7 +377,6 @@ function cellAction() {
             } else { noTalk(); }
         }
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------>
     if ( x == 3 && y == 3) { //Startposition!
         passableDir_NSEW();
         if (input == "look") {
@@ -376,15 +392,14 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------>
     if ( x == 4 && y == 3) {
         passableDir_NEW();
         if (input == "look") {
@@ -408,7 +423,6 @@ function cellAction() {
             } else { nothingToPickup(); }
         }
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------>
     if ( x == 5 && y == 3) {
         passableDir_NSEW();
         if (input == "look") {
@@ -432,9 +446,12 @@ function cellAction() {
             } else { nothingToPickup(); }
         }
     }
-    //------------------------------------------------------------------------------------------------------------------------------------------>
     if ( x == 6 && y == 3) {
-        passableDir_NSW();
+        if (events[2][1] == true) {
+            passableDir_NSW();
+        } else {
+            passableDir_SW();
+        }
         if (input == "look") {
             if (false) {
 
@@ -445,10 +462,15 @@ function cellAction() {
 
             } else { nothingToPickup(); }
         }
-        if (input == "use") {
-            if (false) {
-
-            } else { nothingToPickup(); }
+        if (input[0] == "use" &&  input[1] == "goldenkey" || input[0] == "goldenkey" && input[1] == "use") { //---Use-Golden-Key-to-open-Gate--->
+            if (items[8][2] && !items[8][3]) {
+                items[8][3] = true;
+                events[2][1] = true;
+                document.getElementById('casket').src='/img/goldenKey_used.png';
+                let blockMessage = "I opened the gate with the golden key!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                drawEventLocation()
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
@@ -532,11 +554,11 @@ function cellAction() {
         if (input == "look") {
             if (!items[6][3]) { //---Blue-Orb-Altar--->
                 let blockMessage = "Here is an altar with a circular indentation. There is something written on it.";
-                let altarMessage = "The deep blue artefact will guide your way!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("blue") + "</p>";
+                let altarMessage = " The deep blue artefact will guide your way!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("blue") + "</p>";
             } else {
                 let blockMessage = "I already put the blue orb in the circular indentation.";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             }
         }
         if (input == "pickup") {
@@ -544,10 +566,15 @@ function cellAction() {
 
             } else { nothingToPickup(); }
         }
-        if (input == "use") {
-            if (false) {
-
-            } else { nothingToPickup(); }
+        if (input[0] == "use" &&  input[1] == "blueorb" || input[0] == "blueorb" && input[1] == "use") { //---Use-BlueOrb--->
+            if (items[6][2] && !items[6][3]) {
+                items[6][3] = true;
+                events[6][1] = true;
+                document.getElementById('blueOrb').src='/img/blueOrb_used.png';
+                let blockMessage = "I put the blue orb on the altar. It starts glowing!";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                drawEventLocation()
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
@@ -581,17 +608,17 @@ function cellAction() {
     if ( x == 6 && y == 4) {
         passableDir_NW();
         if (input == "look") {
-            if (!items[3][1] && !items[3][2]) { //---bottle--->
+            if (!items[3][2]) { //---bottle--->
                 items[3][1] = true;
                 let blockMessage = "There is an empty bottle on the ground!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
             if (!items[3][2]) {//---bottle--->
                 items[3][2] = true;
                 document.getElementById('bottle').hidden = false;
-                document.getElementById('bottletext').hidden = false;
+                document.getElementById('bottleText').hidden = false;
                 confirm("You got a bottle!");
             } else { nothingToPickup(); }
         }
@@ -634,17 +661,17 @@ function cellAction() {
     if ( x == 2 && y == 5) {
         passableDir_NSE();
         if (input == "look") {
-            if (!items[2][1] && !items[2][2]) { //---Casket--->
+            if (!items[2][2]) { //---Casket--->
                 items[2][1] = true;
                 let blockMessage = "There is a casket on the ground!";
-                chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
             if (!items[2][2]) {//---Casket--->
                 items[2][2] = true;
                 document.getElementById('casket').hidden = false;
-                document.getElementById('caskettext').hidden = false;
+                document.getElementById('casketText').hidden = false;
                 confirm("You got a casket!");
             } else { nothingToPickup(); }
         }
@@ -712,15 +739,23 @@ function cellAction() {
 
             } else { nothingToLook(); }
         }
-        if (input == "pickup") {
-            if (false) {
-
+        if (input == "pickup") { //---Red-Orb--->
+            if (events[3][1] && !items[4][2]) {
+                items[4][2] = true;
+                document.getElementById('redOrb').hidden = false;
+                document.getElementById('redOrbText').hidden = false;
+                confirm("You got a Red Orb!");
             } else { nothingToPickup(); }
         }
-        if (input == "use") {
-            if (false) {
-
-            } else { nothingToPickup(); }
+        if (input[0] == "use" &&  input[1] == "redliquid" || input[0] == "redliquid" && input[1] == "use") { //---Use-Red-Liquid--->
+            if (items[9][2] && !items[9][3]) {
+                items[9][3] = true;
+                events[3][1] = true;
+                document.getElementById('bottle').src='/img/redLiquid_used.png';
+                let blockMessage = "The deepenings at the bottom begin to fill with the red liquid! A red orb appears.";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                drawEventLocation()
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
@@ -898,6 +933,8 @@ function cellAction() {
     else if (input == "east" && pathOK) {x = clamp(x+1, 1, 6); document.getElementById("X").innerHTML = x; drawPlayerLocation();updatedb(input);}
     else if (input == "west" && pathOK) {x = clamp(x-1, 1, 6); document.getElementById("X").innerHTML = x; drawPlayerLocation();updatedb(input);}
     else if (input == "north" || input == "south" || input == "east" || input == "west") {blockedPath();}
+    if (input == "look" || input == "pickup" || input.includes('use') || input == "talk") {updatedb(input);}
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 //---------passable-directions---------->
@@ -976,15 +1013,18 @@ function blockedPath() {
     if (rngMessage == "3") {var blockMessage = "There is no path...";}
     if (rngMessage == "4") {var blockMessage = "I can´t get past the undergrowth...";}
     if (rngMessage == "5") {var blockMessage = "I get a strange feeling looking in this direction...";}
+    if ( x == 6 && y == 3 && input == "north") {var blockMessage = "I need a key for this gate!";}
 
     chatInput.value = "";
     var reserve = chatWindow.innerHTML;
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
     saveInput = !saveInput;
     setTimeout(function() {
         chatWindow.innerHTML = reserve;
         saveInput = !saveInput;
     }, 1500);
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 function nothingToLook() {
@@ -992,11 +1032,13 @@ function nothingToLook() {
     var reserve = chatWindow.innerHTML;
     chatInput.value = "";
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
     saveInput = !saveInput;
     setTimeout(function() {
         chatWindow.innerHTML = reserve;
         saveInput = !saveInput;
     }, 1000);
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 function nothingToPickup() {
@@ -1004,11 +1046,13 @@ function nothingToPickup() {
     chatInput.value = "";
     var reserve = chatWindow.innerHTML;
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
     saveInput = !saveInput;
     setTimeout(function() {
         chatWindow.innerHTML = reserve;
         saveInput = !saveInput;
     }, 1000);
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 function cannotUse() {
@@ -1016,11 +1060,13 @@ function cannotUse() {
     chatInput.value = "";
     var reserve = chatWindow.innerHTML;
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
     saveInput = !saveInput;
     setTimeout(function() {
         chatWindow.innerHTML = reserve;
         saveInput = !saveInput;
     }, 1000);
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 function noTalk() {
@@ -1028,22 +1074,53 @@ function noTalk() {
     chatInput.value = "";
     var reserve = chatWindow.innerHTML;
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
     saveInput = !saveInput;
     setTimeout(function() {
         chatWindow.innerHTML = reserve;
         saveInput = !saveInput;
     }, 1000);
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
-function casket() {
-    let code = prompt("It won´t open, but it has a combination lock!");
-    if (code == "12345") {
-    console.log("Richtig!");
-
+function casket() { //caskest && goldenkey
+    if (items[8][2]) {  
+        chatInput.value += ' goldenKey ';
     } else {
-    console.log("Falsch!");
+        let code = prompt("It won´t open, but it has a combination lock!");
+        if (code == "12345") {
+            console.log("Richtig!");
+            items[2][3] = true;
+            items[8][2] = true;
+            document.getElementById('casket').src='/img/goldenKey.png';
+            document.getElementById('casketText').textContent="GoldenKey";
+            let blockMessage = "The code was right. There is a golden key inside.";
+            chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+            drawEventLocation()
+        } else {
+            console.log("Falsch!");
+            var blockMessage = "That was the wrong code...";
+            chatInput.value = "";
+            var reserve = chatWindow.innerHTML;
+            chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
+            saveInput = !saveInput;
+            setTimeout(function() {
+                chatWindow.innerHTML = reserve;
+                saveInput = !saveInput;
+            }, 1000);
+        }
+        chatWindow.scrollTo(0,chatWindow.scrollHeight);
+    }
+}
 
-    } 
+function bottle() { //bottle & red liquid
+    if (items[3][3]) {  
+        chatInput.value += ' redLiquid ';
+    } else {
+        chatInput.value += ' bottle '
+    }
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 function shieldDescription() {
@@ -1051,11 +1128,13 @@ function shieldDescription() {
     chatInput.value = "";
     var reserve = chatWindow.innerHTML;
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("blue") + "</p>";
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
     saveInput = !saveInput;
     setTimeout(function() {
         chatWindow.innerHTML = reserve;
         saveInput = !saveInput;
     }, 3000);
+    chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
 function uncover() {
@@ -1077,11 +1156,6 @@ function showItems() {
 }
 
 function test() {
-    let code = prompt("Enter a code!");
-    if (code == "12345") {
-    console.log("Richtig!");
-    } else {
-    console.log("Falsch!");
-    } 
+
 }
 
