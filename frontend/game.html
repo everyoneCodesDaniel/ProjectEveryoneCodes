@@ -395,6 +395,38 @@
         
     }
 
+    function drawEventLocation() {
+        let cellCenter = 90;
+        let eventX, eventY, radius;
+        let circlefillColor;
+
+        //----------------------------Items-------------------------->
+        if (items[0][1] && document.getElementById('rustyKey').hidden == true) { //Key1
+            eventX = (canvas.node.width / 6 ) * 1 - cellCenter;
+            eventY = (canvas.node.height / 6 ) * 3 - cellCenter;
+            circlefillColor = '#FFD700'; 
+            radius = 10;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        if (events[0][1] && document.getElementById('doll').hidden == true) { //doll
+            eventX = (canvas.node.width / 6 ) * 2 - 60;
+            eventY = (canvas.node.height / 6 ) * 3 - 95;
+            circlefillColor = '#FFD700'; 
+            radius = 10;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        //---------------------------Events-------------------------->
+        if (!events[0][1] && document.getElementById('X2/Y3').hidden == true) { //chest
+            eventX = (canvas.node.width / 6 ) * 2 - 60;
+            eventY = (canvas.node.height / 6 ) * 3 - 95;
+            circlefillColor = '#964B00'; 
+            radius = 15;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        //----------------------------NPCs--------------------------->
+        
+    }
+
     function createCanvas(parent) {
         canvas.node = document.createElement('canvas');
         canvas.context = canvas.node.getContext('2d');
@@ -532,11 +564,6 @@
         }
         window.location='/index.html';
     };
-
-    var lookDB = true;
-    var useDB = true;
-    var pickupDB = true;
-    var talkDB = true;
 
     async function updatedb(input) {
         console.log(input)
