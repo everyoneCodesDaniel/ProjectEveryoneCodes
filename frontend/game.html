@@ -65,7 +65,7 @@
     <span class="spanright" id="dollText" hidden>Doll</span>
     <br><br>
     <img class="picleft" id="casket" src="/img/casket.png" onclick="casket()" hidden>
-    <img class="picright" id="bottle" src="/img/bottle.png" onclick="chatInput.value += ' bottle '" hidden><br>
+    <img class="picright" id="bottle" src="/img/bottle.png" onclick="bottle()" hidden><br>
     <span class="spanleft" id="casketText" hidden>Casket</span>
     <span class="spanright" id="bottleText" hidden>Bottle</span>
     <br><br>
@@ -95,14 +95,14 @@
     <span class="left">talk</span>
     <span class="right">west/w</span><br>
     <h3 style="text-align: center;">Legend</h3>
-    <span class="left"><span class="items"></span>Items</span>
-    <span class="right"><span class="chest"></span>Chests</span><br>
-    <span class="left"><span class="npc"></span>NPC</span>
-    <span class="right"><span class="sign"></span>Sign</span><br>
-    <span class="left"><span class="tree"></span>Tree</span>
-    <span class="right"><span class="altar"></span>Altar</span><br>
-    <span class="left"><span class="pentagramm"></span>Pentagramm</span>
-    <span class="right"><span class="gate"></span>Gate</span>
+    <span class="left"><span class="items"></span> Items</span>
+    <span class="right">Chests <span class="chest"></span></span><br>
+    <span class="left"><span class="npc"></span> NPC</span>
+    <span class="right">Sign <span class="sign"></span></span><br>
+    <span class="left"><span class="tree"></span> Tree</span>
+    <span class="right">Altar <span class="altar"></span></span><br>
+    <span class="left"><span class="pentagramm"></span> Pentagramm</span>
+    <span class="right">Gate <span class="gate"></span></span>
 
 </div>
 </div>
@@ -132,7 +132,11 @@
     generateEvents();
     var saveInput = new Boolean("true");
     var pathOK = new Boolean("false");
-    var validUse = new Boolean("false"); 
+    var validUse = new Boolean("false");
+    var lookDB = new Boolean(false);
+    var pickupDB = new Boolean(false);
+    var useDB = new Boolean(false);
+    var talkDB = new Boolean(false);
     document.getElementById("X").innerHTML = x;
     document.getElementById("Y").innerHTML = y;
     var container = document.getElementById('canvas');
@@ -171,7 +175,8 @@
                     input = "west";
                     cellAction();
                 }
-                else if (input[0] == "look") {           
+                else if (input[0] == "look") { 
+                    input = "look";           
                     cellAction();
                     drawEventLocation();
                 }
@@ -203,7 +208,8 @@
                     }
                     
                 }
-                else if (input[0] == "talk") {           
+                else if (input[0] == "talk") {
+                    input = "talk";            
                     cellAction();
                     drawEventLocation();
                 }
@@ -219,11 +225,13 @@
         chatInput.value = "";
         var reserve = chatWindow.innerHTML;
         chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + "Warning" + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
+        chatWindow.scrollTo(0,chatWindow.scrollHeight);
         saveInput = !saveInput;
         setTimeout(function() {
             chatWindow.innerHTML = reserve;
             saveInput = !saveInput;
         }, 1000);
+        chatWindow.scrollTo(0,chatWindow.scrollHeight);
     }
 
     function drawPlayerLocation() {
@@ -392,7 +400,6 @@
             radius = 12;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        
     }
 
     function createCanvas(parent) {
@@ -478,7 +485,9 @@
         items.push(["redorb", true, false, false]);
         items.push(["greenorb", true, false, false]);
         items.push(["blueorb", true, false, false]);
-        items.push(["doll", false, false, false]);
+        items.push(["shield", false, false, false]);
+        items.push(["goldenkey", true, false, false]);
+        items.push(["redliquid", true, false, false]);
         //----------------Events-------------------->
         //----["NAME", used?]--->
         events.push(["chest", false]);
@@ -533,11 +542,6 @@
         window.location='/index.html';
     };
 
-    var lookDB = true;
-    var useDB = true;
-    var pickupDB = true;
-    var talkDB = true;
-
     async function updatedb(input) {
         console.log(input)
         player = null || sessionStorage.getItem("player")
@@ -586,7 +590,52 @@
                     method: "PUT",
                     body: JSON.stringify({x: x, y: y})
                     })
+            } else if (input == "look") {
+                let url = new URL(window.location.origin + '/look');
+                await fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PATCH",
+                    body: JSON.stringify({lookDB: lookDB})
+                    })
+            } else if (input == "pickup") {
+                let url = new URL(window.location.origin + '/pickup');
+                await fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PATCH",
+                    body: JSON.stringify({pickupDB: pickupDB})
+                    })
+            } else if (input.includes('use')) {
+                let url = new URL(window.location.origin + '/use');
+                await fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PATCH",
+                    body: JSON.stringify({useDB: useDB})
+                    })
+            } else if (input == "look") {
+                let url = new URL(window.location.origin + '/talk');
+                await fetch(url, 
+                    {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "PATCH",
+                    body: JSON.stringify({talkDB: talkDB})
+                    })
             }
+            lookDB, pickupDB, useDB, talkDB = false;
         }
     }
 </script>

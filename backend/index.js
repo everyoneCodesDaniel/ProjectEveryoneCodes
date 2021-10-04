@@ -267,6 +267,7 @@ app.patch("/look", async (req, res) => {
     var id;
     var counter2 = counter-1;
     var symbol;
+    console.log(req.body.lookDB)
     await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
@@ -289,6 +290,7 @@ app.patch("/use", async (req, res) => {
     var id;
     var counter2 = counter-1;
     var symbol;
+    console.log(req.body.useDB)
     await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
@@ -311,6 +313,7 @@ app.patch("/pickup", async (req, res) => {
     var id;
     var counter2 = counter-1;
     var symbol;
+    console.log(req.body.pickupDB)
     await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
@@ -333,6 +336,7 @@ app.patch("/talk", async (req, res) => {
     var id;
     var counter2 = counter-1;
     var symbol;
+    console.log(req.body.talkDB)
     await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
