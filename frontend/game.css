@@ -103,4 +103,59 @@ h2 {
     position:absolute;
     z-index:-1;
 }
-
+.items{
+    height: 12px;
+    width: 12px;
+    background-color: #FFD700;
+    border-radius: 100%;
+    display: inline-block;
+  }
+.chest{
+    height: 12px;
+    width: 12px;
+    background-color: #964B00;
+    border-radius: 100%;
+    display: inline-block;
+}
+.npc{
+    height: 12px;
+    width: 12px;
+    background-color: #0f0cc5;
+    border-radius: 100%;
+    display: inline-block;
+}
+.sign{
+    height: 12px;
+    width: 12px;
+    background-color: #f0951d;
+    border-radius: 100%;
+    display: inline-block;
+}
+.tree{
+    height: 12px;
+    width: 12px;
+    background-color: #054709;
+    border-radius: 100%;
+    display: inline-block;
+}
+.altar{
+    height: 12px;
+    width: 12px;
+    background-color: #4b4846;
+    border-radius: 100%;
+    display: inline-block;
+}
+.pentagramm{
+    height: 12px;
+    width: 12px;
+    background-color: #cc0707;
+    border-radius: 100%;
+    display: inline-block;
+}
+.gate{
+    height: 12px;
+    width: 12px;
+    background-color: #181513;
+    border-radius: 100%;
+    display: inline-block;
+}
