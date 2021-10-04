@@ -92,27 +92,39 @@ app.post("/project/loginplayer", async (req, res) => {
 var counter = 0;
 
 app.put("/startgame/:username", async (req, res) => {
-    await dbQuery("create table durchläufe" + counter + "(id int primary key auto_increment," +
-        "ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('gewonnen', 'verloren'))," +
-        "zuganzahl int DEFAULT 0,personId int not NULL," +
-        "constraint durchlauf" + counter + " foreign key (personId) REFERENCES personen (personId));"
-    );
-    let id;
-    await dbQuery("SELECT personId FROM personen where username=?", [req.params.username]).then(async rows => {
-        id = rows[0].personId
-        await dbQuery("insert into durchläufe" + counter + "(personId) values (?);",
-            [id]).then(async rows => {
-                console.log(rows)
-                await dbQuery("create table details" + counter + "(zuganzahl int primary key auto_increment," +
-                    "look VARCHAR(1) DEFAULT NULL,pickup VARCHAR(1) DEFAULT NULL," +
-                    "apply VARCHAR(1) DEFAULT NULL,talk VARCHAR(1) DEFAULT NULL," +
-                    "richtung VARCHAR (10) DEFAULT NULL,position VARCHAR(20) not NULL," +
-                    "durchlaufid int not NULL," +
-                    "constraint details" + counter + " foreign key (durchlaufid) REFERENCES durchläufe" + counter + "(id));").then(
-                        connection.query("insert into details" + counter++ + " (position,durchlaufid) values ('x3/y3',1)")
-                    )
-            })
-    })
+    try {
+        console.log("StartgameOIDA!");
+        await dbQuery("create table durchläufe" + counter + "(id int primary key auto_increment, ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('gewonnen', 'verloren')), zuganzahl int DEFAULT 0,personId int not NULL, constraint durchlauf" + counter + " foreign key (personId) REFERENCES personen (personId));"
+        );
+        console.log("Durchläufe created!");
+        var id = await dbQuery("SELECT personId FROM personen where username = ?;", [req.params.username]);
+        id = id[0].personId;
+        await dbQuery("insert into durchläufe" + counter + "(personId) values (?);", [id]).then(async rows => {
+            //console.log(rows)
+            await dbQuery("create table details" + counter + "(zuganzahl int primary key auto_increment, look VARCHAR(1) DEFAULT NULL,pickup VARCHAR(1) DEFAULT NULL, apply VARCHAR(1) DEFAULT NULL,talk VARCHAR(1) DEFAULT NULL, richtung VARCHAR (10) DEFAULT NULL,position VARCHAR(20) not NULL, durchlaufid int not NULL, constraint details" + counter + " foreign key (durchlaufid) REFERENCES durchläufe" + counter + "(id));").
+            then(connection.query("insert into details" + counter++ + " (position,durchlaufid) values ('x3/y3',1)")
+            )
+        })
+        console.log("Details created!");
+    } catch (err) {
+        console.log("something went wrong...", err);
+        res.sendStatus(500);
+    }
+    console.log("Finish!");
+});
+
+app.delete("/deleteAll", async (req, res) => {
+    try {
+        await dbQuery("SET FOREIGN_KEY_CHECKS = 0;");
+        for (var deleteDB = 0; deleteDB <= 10; deleteDB++) {
+            await dbQuery("drop table if exists details" + deleteDB + ", durchläufe" + deleteDB + ";");
+            console.log("deleted DB: " + deleteDB);
+        }
+        await dbQuery("SET FOREIGN_KEY_CHECKS = 1;");
+    } catch (err) {
+        console.log("something went wrong...", err);
+        res.sendStatus(500);
+    }
 });
 
 app.put("/exitgame", async (req, res) => {
@@ -123,11 +135,7 @@ app.put("/exitgame", async (req, res) => {
     console.log(counter2)
     await dbQuery("SELECT zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         console.log(rows)
-        if (rows.length === 1) {
-            zug = 0;
-        } else {
-            zug = rows[0].zuganzahl
-        }
+        zug = rows[0].zuganzahl
         console.log(zug)
         await dbQuery("select id FROM durchläufe" + counter2 + " ORDER BY id DESC LIMIT 1;").then(rows => {
                 id = rows[0].id
@@ -145,11 +153,7 @@ app.put("/wongame", async (req, res) => {
     console.log(counter2)
     await dbQuery("SELECT zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         console.log(rows)
-        if (rows.length === 1) {
-            zug = 0;
-        } else {
-            zug = rows[0].zuganzahl
-        }
+        zug = rows[0].zuganzahl
         console.log(zug)
         await dbQuery("select id FROM durchläufe" + counter2 + " ORDER BY id DESC LIMIT 1;").then(rows => {
             id = rows[0].id

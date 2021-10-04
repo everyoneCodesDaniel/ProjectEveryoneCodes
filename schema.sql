@@ -32,3 +32,50 @@ richtung VARCHAR (10) DEFAULT NULL,
 position VARCHAR(20) not NULL,
 durchlaufid int not NULL,
 constraint details foreign key (durchlaufid) REFERENCES durchläufe(id))
+
+
+
+SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists details0;
+drop table if exists durchläufe0;
+drop table if exists details1;
+drop table if exists durchläufe1;
+drop table if exists details2;
+drop table if exists durchläufe2;
+drop table if exists details3;
+drop table if exists durchläufe3;
+drop table if exists details4;
+drop table if exists durchläufe4;
+drop table if exists details5;
+drop table if exists durchläufe5;
+drop table if exists details6;
+drop table if exists durchläufe6;
+drop table if exists details7;
+drop table if exists durchläufe7;
+drop table if exists details8;
+drop table if exists durchläufe8;
+drop table if exists details9;
+drop table if exists durchläufe9;
+drop table if exists details10;
+drop table if exists durchläufe10;
+drop table if exists details11;
+drop table if exists durchläufe11;
+drop table if exists details12;
+drop table if exists durchläufe12;
+drop table if exists details13;
+drop table if exists durchläufe13;
+drop table if exists details14;
+drop table if exists durchläufe14;
+drop table if exists details15;
+drop table if exists durchläufe15;
+drop table if exists details16;
+drop table if exists durchläufe16;
+drop table if exists details17;
+drop table if exists durchläufe17;
+drop table if exists details18;
+drop table if exists durchläufe18;
+drop table if exists details19;
+drop table if exists durchläufe19;
+drop table if exists details20;
+drop table if exists durchläufe20;
+SET FOREIGN_KEY_CHECKS = 1;
