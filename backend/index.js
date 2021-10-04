@@ -106,6 +106,7 @@ app.put("/startgame/:username", async (req, res) => {
             )
         })
         console.log("Details created!");
+        res.send('worked')
     } catch (err) {
         console.log("something went wrong...", err);
         res.sendStatus(500);
@@ -121,6 +122,7 @@ app.delete("/deleteAll", async (req, res) => {
             console.log("deleted DB: " + deleteDB);
         }
         await dbQuery("SET FOREIGN_KEY_CHECKS = 1;");
+        res.send('worked')
     } catch (err) {
         console.log("something went wrong...", err);
         res.sendStatus(500);
@@ -143,6 +145,7 @@ app.put("/exitgame", async (req, res) => {
                 connection.query("update durchläufe" + counter2 + " set zuganzahl = " + zug + ", ergebnis = 'verloren' where id = " + id);
             });
         });
+        res.send('worked')
     });
 
 app.put("/wongame", async (req, res) => {
@@ -161,6 +164,7 @@ app.put("/wongame", async (req, res) => {
             connection.query("update durchläufe" + counter2 + " set zuganzahl = " + zug + ", ergebnis = 'gewonnen' where id = " + id);
         });
     });
+    res.send('worked')
 });
 
 app.put("/direction/north", async (req, res) => {
@@ -184,6 +188,7 @@ app.put("/direction/north", async (req, res) => {
     console.log('ynachhernorth ' + y)
     console.log('c2nachhernorth ' + counter2)
     console.log('cnachhernorth ' + counter)
+    res.send('worked')
 });
 
 app.put("/direction/south", async (req, res) => {
@@ -207,6 +212,7 @@ app.put("/direction/south", async (req, res) => {
     console.log('ynachhersouth ' + y)
     console.log('c2nachhersouth ' + counter2)
     console.log('cnachhersouth ' + counter)
+    res.send('worked')
 });
 
 app.put("/direction/east", async (req, res) => {
@@ -230,6 +236,7 @@ app.put("/direction/east", async (req, res) => {
     console.log('ynachhereast ' + y)
     console.log('c2nachhereast ' + counter2)
     console.log('cnachhereast ' + counter)
+    res.send('worked')
 });
 
 app.put("/direction/west", async (req, res) => {
@@ -253,6 +260,95 @@ app.put("/direction/west", async (req, res) => {
     console.log('ynachherwest ' + y)
     console.log('c2nachherwest ' + counter2)
     console.log('cnachherwest ' + counter)
+    res.send('worked')
+});
+
+app.patch("/look", async (req, res) => {
+    var id;
+    var counter2 = counter-1;
+    var symbol;
+    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+        id = rows[0].zuganzahl
+        console.log(id)
+        await dbQuery("select look from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+            symbol = rows[0].look
+            console.log(symbol)
+            if (symbol === 'x' || symbol === null) {
+                if (req.body.lookDB) {
+                    connection.query("update details" + counter2 + " set look='o' where zuganzahl = " + id)
+                } else {
+                    connection.query("update details" + counter2 + " set look='x' where zuganzahl = " + id)
+                }
+            }
+        }
+        );
+    });
+});
+
+app.patch("/use", async (req, res) => {
+    var id;
+    var counter2 = counter-1;
+    var symbol;
+    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+        id = rows[0].zuganzahl
+        console.log(id)
+        await dbQuery("select apply from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+            symbol = rows[0].apply
+            console.log(symbol)
+            if (symbol === 'x' || symbol === null) {
+                if (req.body.useDB) {
+                    connection.query("update details" + counter2 + " set apply='o' where zuganzahl = " + id)
+                } else {
+                    connection.query("update details" + counter2 + " set apply='x' where zuganzahl = " + id)
+                }
+            }
+        }
+        );
+    });
+});
+
+app.patch("/pickup", async (req, res) => {
+    var id;
+    var counter2 = counter-1;
+    var symbol;
+    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+        id = rows[0].zuganzahl
+        console.log(id)
+        await dbQuery("select pickup from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+            symbol = rows[0].pickup
+            console.log(symbol)
+            if (symbol === 'x' || symbol === null) {
+                if (req.body.pickupDB) {
+                    connection.query("update details" + counter2 + " set pickup='o' where zuganzahl = " + id)
+                } else {
+                    connection.query("update details" + counter2 + " set pickup='x' where zuganzahl = " + id)
+                }
+            }
+        }
+        );
+    });
+});
+
+app.patch("/talk", async (req, res) => {
+    var id;
+    var counter2 = counter-1;
+    var symbol;
+    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+        id = rows[0].zuganzahl
+        console.log(id)
+        await dbQuery("select talk from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+            symbol = rows[0].talk
+            console.log(symbol)
+            if (symbol === 'x' || symbol === null) {
+                if (req.body.talkDB) {
+                    connection.query("update details" + counter2 + " set talk='o' where zuganzahl = " + id)
+                } else {
+                    connection.query("update details" + counter2 + " set talk='x' where zuganzahl = " + id)
+                }
+            }
+        }
+        );
+    });
 });
 
 /* let id = connection.query("select * from durchläufe where personId = ? order by id desc limit 1",

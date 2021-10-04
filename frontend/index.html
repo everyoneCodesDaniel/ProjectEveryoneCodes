@@ -53,6 +53,7 @@ button {
 
 .button2 {
     width: fit-content;
+    width: -moz-fit-content;
     padding: 5px 5px;
     font-family: Monaco, monospace;
     font-weight: bold;
@@ -144,8 +145,8 @@ async function startGame(player) {
     window.location='/game.html';
 }
 
-function deleteAllDB() {
-    fetch('/deleteAll', {
+async function deleteAllDB() {
+    await fetch('/deleteAll', {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

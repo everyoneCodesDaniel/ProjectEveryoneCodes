@@ -13,6 +13,7 @@ function cellAction() {
                 let blockMessage = "I already put the red orb in the circular indentation.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             }
+            lookDB = true;
         }
         if (input == "pickup") {
             if (false) {
@@ -27,12 +28,13 @@ function cellAction() {
                 let blockMessage = "I put the red orb on the altar. It starts glowing!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 2 && y == 1) {
@@ -41,6 +43,7 @@ function cellAction() {
             if (!items[5][2]) { //---Green-Orb--->
                 let blockMessage = "There is a green orb on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                lookDB = true;
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
@@ -49,17 +52,18 @@ function cellAction() {
                 document.getElementById('greenOrb').hidden = false;
                 document.getElementById('greenOrbText').hidden = false;
                 confirm("You got a green orb!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 3 && y == 1) {
@@ -77,12 +81,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 4 && y == 1) {
@@ -100,12 +104,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 5 && y == 1) {
@@ -115,6 +119,7 @@ function cellAction() {
                 items[7][1] = true;
                 let blockMessage = "There is a shield on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                lookDB = true;
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
@@ -123,17 +128,18 @@ function cellAction() {
                 document.getElementById('shield').hidden = false;
                 document.getElementById('shieldText').hidden = false;
                 confirm("You got a shield!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 6 && y == 1) {
@@ -147,6 +153,7 @@ function cellAction() {
                 let blockMessage = "I already put the green orb in the circular indentation.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             }
+            lookDB = true;
         }
         if (input == "pickup") {
             if (false) {
@@ -161,12 +168,13 @@ function cellAction() {
                 let blockMessage = "I put the green orb on the altar. It starts glowing!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     //#endregion
@@ -186,12 +194,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 2 && y == 2) {
@@ -209,12 +217,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 3 && y == 2) {
@@ -232,12 +240,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 4 && y == 2) {
@@ -255,12 +263,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 5 && y == 2) {
@@ -268,6 +276,7 @@ function cellAction() {
         if (input == "look") {
             let blockMessage = "A big tree. In front of it is a red puddle.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+            lookDB = true;
         }
         if (input == "pickup") {
             if (false) {
@@ -284,12 +293,13 @@ function cellAction() {
                 let blockMessage = "I filled the bottle with the red liquid.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 6 && y == 2) {
@@ -307,12 +317,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     //#endregion
@@ -333,6 +343,7 @@ function cellAction() {
                 document.getElementById('rustyKey').hidden = false;
                 document.getElementById('rustyKeytext').hidden = false;
                 confirm("You got a Rusty Key!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input == "use") {
@@ -359,6 +370,7 @@ function cellAction() {
                 document.getElementById('doll').hidden = false;
                 document.getElementById('dollText').hidden = false;
                 confirm("You got a doll!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input[0] == "use" &&  input[1] == "rustykey" || input[0] == "rustykey" && input[1] == "use") { //---Use-RustyKey--->
@@ -369,6 +381,7 @@ function cellAction() {
                 let blockMessage = "I opened the chest with the key! There is a doll inside!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
@@ -415,12 +428,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 5 && y == 3) {
@@ -438,12 +451,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 6 && y == 3) {
@@ -470,12 +483,13 @@ function cellAction() {
                 let blockMessage = "I opened the gate with the golden key!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     //#endregion
@@ -495,12 +509,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 2 && y == 4) {
@@ -518,12 +532,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 3 && y == 4) {
@@ -541,12 +555,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 4 && y == 4) {
@@ -560,6 +574,7 @@ function cellAction() {
                 let blockMessage = "I already put the blue orb in the circular indentation.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             }
+            lookDB = true;
         }
         if (input == "pickup") {
             if (false) {
@@ -574,12 +589,13 @@ function cellAction() {
                 let blockMessage = "I put the blue orb on the altar. It starts glowing!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 5 && y == 4) {
@@ -597,12 +613,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 6 && y == 4) {
@@ -612,6 +628,7 @@ function cellAction() {
                 items[3][1] = true;
                 let blockMessage = "There is an empty bottle on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                lookDB = true;
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
@@ -620,17 +637,18 @@ function cellAction() {
                 document.getElementById('bottle').hidden = false;
                 document.getElementById('bottleText').hidden = false;
                 confirm("You got a bottle!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     //#endregion
@@ -650,12 +668,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 2 && y == 5) {
@@ -665,6 +683,7 @@ function cellAction() {
                 items[2][1] = true;
                 let blockMessage = "There is a casket on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                lookDB = true;
             } else { nothingToLook(); }
         }
         if (input == "pickup") {
@@ -673,17 +692,18 @@ function cellAction() {
                 document.getElementById('casket').hidden = false;
                 document.getElementById('casketText').hidden = false;
                 confirm("You got a casket!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 3 && y == 5) {
@@ -701,12 +721,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 4 && y == 5) {
@@ -724,12 +744,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 5 && y == 5) {
@@ -745,6 +765,7 @@ function cellAction() {
                 document.getElementById('redOrb').hidden = false;
                 document.getElementById('redOrbText').hidden = false;
                 confirm("You got a Red Orb!");
+                pickupDB = true;
             } else { nothingToPickup(); }
         }
         if (input[0] == "use" &&  input[1] == "redliquid" || input[0] == "redliquid" && input[1] == "use") { //---Use-Red-Liquid--->
@@ -755,12 +776,13 @@ function cellAction() {
                 let blockMessage = "The deepenings at the bottom begin to fill with the red liquid! A red orb appears.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 drawEventLocation()
+                useDB = true;
             } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 6 && y == 5) {
@@ -778,12 +800,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     //#endregion
@@ -803,12 +825,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 2 && y == 6) {
@@ -826,12 +848,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 3 && y == 6) {
@@ -849,12 +871,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 4 && y == 6) {
@@ -872,12 +894,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 5 && y == 6) {
@@ -895,12 +917,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     if ( x == 6 && y == 6) {
@@ -918,12 +940,12 @@ function cellAction() {
         if (input == "use") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { cannotUse(); }
         }
         if (input == "talk") {
             if (false) {
 
-            } else { nothingToPickup(); }
+            } else { noTalk(); }
         }
     }
     //#endregion
@@ -1135,6 +1157,29 @@ function shieldDescription() {
         saveInput = !saveInput;
     }, 3000);
     chatWindow.scrollTo(0,chatWindow.scrollHeight);
+}
+
+function casket() {
+    let code = prompt("It won´t open, but it has a combination lock!");
+    if (code == "12345") {
+    console.log("Richtig!");
+
+    } else {
+    console.log("Falsch!");
+
+    } 
+}
+
+function shieldDescription() {
+    var blockMessage = "This shield will save me from an monster´s attack!";
+    chatInput.value = "";
+    var reserve = chatWindow.innerHTML;
+    chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("blue") + "</p>";
+    saveInput = !saveInput;
+    setTimeout(function() {
+        chatWindow.innerHTML = reserve;
+        saveInput = !saveInput;
+    }, 3000);
 }
 
 function uncover() {
