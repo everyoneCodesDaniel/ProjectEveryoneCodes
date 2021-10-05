@@ -133,10 +133,10 @@
     var saveInput = new Boolean("true");
     var pathOK = new Boolean("false");
     var validUse = new Boolean("false");
-    var lookDB = new Boolean("false");
-    var pickupDB = new Boolean("false");
-    var useDB = new Boolean("false");
-    var talkDB = new Boolean("false");
+    var lookDB = new Boolean(false);
+    var pickupDB = new Boolean(false);
+    var useDB = new Boolean(false);
+    var talkDB = new Boolean(false);
     document.getElementById("X").innerHTML = x;
     document.getElementById("Y").innerHTML = y;
     var container = document.getElementById('canvas');
@@ -175,7 +175,8 @@
                     input = "west";
                     cellAction();
                 }
-                else if (input[0] == "look") {           
+                else if (input[0] == "look") { 
+                    input = "look";           
                     cellAction();
                     drawEventLocation();
                 }
@@ -207,7 +208,8 @@
                     }
                     
                 }
-                else if (input[0] == "talk") {           
+                else if (input[0] == "talk") {
+                    input = "talk";            
                     cellAction();
                     drawEventLocation();
                 }
