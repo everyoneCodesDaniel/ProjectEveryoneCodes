@@ -60,6 +60,21 @@ button {
     font-size: medium;
 }
 
+table, th, td {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+}
+
+ul {
+  display: table;
+  margin: 0 auto;
+}
+
 </style>  
 </head>
 
@@ -70,7 +85,7 @@ button {
     <button class="button2" id="login"><a href="/login.html">Log In</a></button>
     <p id="player" hidden></p><br><br>
     <button class="button2" id="registrieren"><a href="/registrieren.html">Sign Up</a></button>
-    <button class="button2" id="logout" onclick="logoutplayer(player)" hidden>Log out</button>
+    <button class="button2" id="logout" onclick="logoutplayer()" hidden>Log out</button>
 
 
     <h2 class="text">Abandoned</h2>
@@ -93,8 +108,17 @@ button {
     <h2>History</h2>
     <div>
         <h3>Here you can see what you did in your last playthrough:</h3>
-        <p>...</p>
-
+        <p>Legend:</p>
+        <div>
+            <table>
+                <tr><th>Type</th><th>Description</th></tr>
+                <tr><td>x</td><td>your interaction failed in this move</td></tr>
+                <tr><td>o</td><td>your interaction was successful in this move</td></tr>
+                <tr><td>null</td><td>you didn't interact in this move</td></tr>
+            </table>
+          </div>
+        <div id="result"></div>
+        <div id="historyshow"></div>
         <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
@@ -111,7 +135,12 @@ button {
 <div id="help" hidden>
     <h2>How to play:</h2>
     <div>
-        <p>Hier wird eine Anleitung stehen</p>
+        <p>This is a browsergame - so ensure you got a PC to play. 
+            When you hit the start button you will get into the maze where you can move by entering commands into the chat window.
+            You can read up all commands in the game. The goal of the game is to exit the maze by completing the necessary quests.
+            While moving through the maze you can find ang get items and use them at another place. Furthermore you will find some NPCs to talk to and to interact.
+        </p>
+        <p>Have fun!</p>
         <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
@@ -120,8 +149,7 @@ button {
     <h2>About</h2>
     <div>
         <h3>Welcome to our little Browsergame!</h3>
-        <p>This game was developed by Daniel Schiefer and Aymara Cortez Espinoza for their final project. We hope you enjoy! &#127918</p>
-
+        <p>This game was developed by Daniel Schiefer and Aymara Cortez Espinoza for their final project at everyoneCodes. We hope you enjoy! &#127918</p>
         <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
@@ -156,7 +184,7 @@ async function deleteAllDB() {
     console.log("DB deleted");
 }
 
-function logoutplayer(player) {
+function logoutplayer() {
     player = null;
     document.getElementById('login').hidden = false;
     document.getElementById('player').hidden = true;
@@ -176,7 +204,6 @@ function logoutplayer(player) {
 }
 
 function checkplayer() {
-    player = null || sessionStorage.getItem("player");
     if (player !== null) {
         document.getElementById('player').innerHTML = 'Logged in as: ' + player;
         document.getElementById('login').hidden = true;
@@ -207,12 +234,37 @@ function displayStart() {
     document.getElementById('rang').hidden = true;
 }
 
-function showHistory() {
+async function showHistory() {
     document.getElementById('history').hidden = false;
     document.getElementById('homepage').hidden = true;
     document.getElementById('about').hidden = true;
     document.getElementById('help').hidden = true;
     document.getElementById('rang').hidden = true;
+
+    if (player !== null) {
+    var url = new URL(window.location.origin + '/history/' + player);
+    let result = await fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: "GET",
+    });
+
+    let data = await result.json();
+    console.log(data)
+    document.getElementById('result').innerHTML = "Result: " + data.ergebnis;
+    var table = "<table>";
+    table += "<tr><th>Move</th><th>Look</th><th>Pickup</th><th>Use</th><th>Talk</th><th>Direction</th><th>Position</th></tr>";
+    for (var row of data.rows) {
+        table += `<tr><td>${row.zuganzahl}</td><td>${row.look}</td><td>${row.pickup}</td>
+            <td>${row.apply}</td><td>${row.talk}</td><td>${row.richtung}</td><td>${row.position}</td></tr>`; 
+    }
+    table += "</table>";
+    document.getElementById('historyshow').innerHTML = table;
+} else if (player === null) {
+    document.getElementById('historyshow').innerHTML = "You don't have an account - create one to show your last run. <br><br>"
+}
 }
 
 function showScore() {

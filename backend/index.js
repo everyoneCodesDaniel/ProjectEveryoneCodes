@@ -89,22 +89,39 @@ app.post("/project/loginplayer", async (req, res) => {
     });
 });
 
-var counter = 0;
+var personId;
+var detailsid;
 
 app.put("/startgame/:username", async (req, res) => {
     try {
         console.log("StartgameOIDA!");
-        await dbQuery("create table durchläufe" + counter + "(id int primary key auto_increment, ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('gewonnen', 'verloren')), zuganzahl int DEFAULT 0,personId int not NULL, constraint durchlauf" + counter + " foreign key (personId) REFERENCES personen (personId));"
-        );
-        console.log("Durchläufe created!");
-        var id = await dbQuery("SELECT personId FROM personen where username = ?;", [req.params.username]);
-        id = id[0].personId;
-        await dbQuery("insert into durchläufe" + counter + "(personId) values (?);", [id]).then(async rows => {
-            //console.log(rows)
-            await dbQuery("create table details" + counter + "(zuganzahl int primary key auto_increment, look VARCHAR(1) DEFAULT NULL,pickup VARCHAR(1) DEFAULT NULL, apply VARCHAR(1) DEFAULT NULL,talk VARCHAR(1) DEFAULT NULL, richtung VARCHAR (10) DEFAULT NULL,position VARCHAR(20) not NULL, durchlaufid int not NULL, constraint details" + counter + " foreign key (durchlaufid) REFERENCES durchläufe" + counter + "(id));").
-            then(connection.query("insert into details" + counter++ + " (position,durchlaufid) values ('x3/y3',1)")
-            )
-        })
+        await dbQuery("SELECT personId FROM personen where username = ?;", [req.params.username]).then(async rows => {
+        personId = rows[0].personId;
+            await dbQuery("SELECT * FROM information_schema.tables WHERE table_schema = 'project' AND table_name = 'durchläufe" + personId +"' LIMIT 1;").then(async rows => {
+                console.log(rows)
+                if (rows.length === 1) {
+                    await dbQuery("insert into durchläufe" + personId + "(personId) values (?);", [personId]).then(async rows => {
+                        await dbQuery("select id from durchläufe" + personId +" ORDER BY id DESC LIMIT 1;").then(async rows => {
+                            detailsid = rows[0].id
+                            await dbQuery("create table details" + personId + "_" + detailsid + "(zuganzahl int primary key auto_increment, look VARCHAR(1) DEFAULT NULL,pickup VARCHAR(1) DEFAULT NULL, apply VARCHAR(1) DEFAULT NULL,talk VARCHAR(1) DEFAULT NULL, richtung VARCHAR (10) DEFAULT NULL,position VARCHAR(20) not NULL, durchlaufid int not NULL, constraint details" + personId + "_" + detailsid + " foreign key (durchlaufid) REFERENCES durchläufe" + personId + "(id));")
+                            .then(connection.query("insert into details" + personId + "_" + detailsid + " (position,durchlaufid) values ('x3/y3'," + detailsid + ")"))
+                        })
+                    })
+                } else if (rows.length === 0){
+                    await dbQuery("create table durchläufe" + personId + "(id int primary key auto_increment, ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('won', 'lost')), zuganzahl int DEFAULT 0,personId int not NULL, constraint durchlauf" + personId + " foreign key (personId) REFERENCES personen (personId));")
+                    .then(async rows=> {
+                        await dbQuery("insert into durchläufe" + personId + "(personId) values (?);", [personId]).then(async rows => {
+                            await dbQuery("select id from durchläufe" + personId +" ORDER BY id DESC LIMIT 1;").then(async rows => {
+                                detailsid = rows[0].id
+                                await dbQuery("create table details" + personId + "_" + detailsid + "(zuganzahl int primary key auto_increment, look VARCHAR(1) DEFAULT NULL,pickup VARCHAR(1) DEFAULT NULL, apply VARCHAR(1) DEFAULT NULL,talk VARCHAR(1) DEFAULT NULL, richtung VARCHAR (10) DEFAULT NULL,position VARCHAR(20) not NULL, durchlaufid int not NULL, constraint details" + personId + "_" + detailsid + " foreign key (durchlaufid) REFERENCES durchläufe" + personId + "(id));")
+                                .then(connection.query("insert into details" + personId + "_" + detailsid + " (position,durchlaufid) values ('x3/y3'," + detailsid + ")"))
+                            })
+                        })
+                    })
+                }
+
+            })
+        });
         console.log("Details created!");
         res.send('worked')
     } catch (err) {
@@ -118,9 +135,14 @@ app.delete("/deleteAll", async (req, res) => {
     try {
         await dbQuery("SET FOREIGN_KEY_CHECKS = 0;");
         for (var deleteDB = 0; deleteDB <= 10; deleteDB++) {
-            await dbQuery("drop table if exists details" + deleteDB + ", durchläufe" + deleteDB + ";");
-            console.log("deleted DB: " + deleteDB);
+            await dbQuery("drop table if exists durchläufe" + deleteDB + ";");
         }
+        for (var deleteDB2 = 0; deleteDB2 <= 10; deleteDB2++) {
+            for (var deleteDB3 = 0; deleteDB3 <= 10; deleteDB3++) {
+                await dbQuery("drop table if exists details" + deleteDB2 + "_" + deleteDB3 +";");
+            }
+        }
+        console.log('Database deleted')
         await dbQuery("SET FOREIGN_KEY_CHECKS = 1;");
         res.send('worked')
     } catch (err) {
@@ -132,18 +154,11 @@ app.delete("/deleteAll", async (req, res) => {
 app.put("/exitgame", async (req, res) => {
     console.log("exitOida!");
     var zug;
-    var id;
-    var counter2 = counter-1;
-    console.log(counter2)
-    await dbQuery("SELECT zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("SELECT zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         console.log(rows)
         zug = rows[0].zuganzahl
         console.log(zug)
-        await dbQuery("select id FROM durchläufe" + counter2 + " ORDER BY id DESC LIMIT 1;").then(rows => {
-                id = rows[0].id
-                console.log(id)    
-                connection.query("update durchläufe" + counter2 + " set zuganzahl = " + zug + ", ergebnis = 'verloren' where id = " + id);
-            });
+        connection.query("update durchläufe" + personId + " set zuganzahl = " + zug + ", ergebnis = 'lost' where id = " + detailsid);
         });
         res.send('worked')
     });
@@ -151,134 +166,86 @@ app.put("/exitgame", async (req, res) => {
 app.put("/wongame", async (req, res) => {
     console.log("wonOida!");
     var zug;
-    var id;
-    var counter2 = counter-1;
-    console.log(counter2)
-    await dbQuery("SELECT zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("SELECT zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         console.log(rows)
         zug = rows[0].zuganzahl
         console.log(zug)
-        await dbQuery("select id FROM durchläufe" + counter2 + " ORDER BY id DESC LIMIT 1;").then(rows => {
-            id = rows[0].id
-            console.log(id)
-            connection.query("update durchläufe" + counter2 + " set zuganzahl = " + zug + ", ergebnis = 'gewonnen' where id = " + id);
-        });
+        connection.query("update durchläufe" + personId + " set zuganzahl = " + zug + ", ergebnis = 'won' where id = " + detailsid);
     });
     res.send('worked')
 });
 
 app.put("/direction/north", async (req, res) => {
     var id;
-    console.log('idvorhernorth ' + id)
     var x = req.body.x;
-    console.log('xvorhernorth ' +x)
     var y = req.body.y;
-    console.log('yvorhernorth ' + y)
-    var counter2 = counter-1;
-    console.log('c2vorhernorth ' + counter2)
-    console.log('cvorhernorth ' + counter)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
-        await dbQuery("update details" + counter2 + " set richtung = 'n' where zuganzahl = " + id).then(
-            connection.query("insert into details" + counter2 + " (position,durchlaufid) values ('x" + x + "/y" + y + "',1)")
+        await dbQuery("update details" + personId + "_" + detailsid + " set richtung = 'n' where zuganzahl = " + id).then(
+            connection.query("insert into details" + personId + "_" + detailsid + " (position,durchlaufid) values ('x" + x + "/y" + y + "'," + detailsid + ")")
         );
     });
-    console.log('idnachhernorth ' + id)
-    console.log('xnachhernorth ' + x)
-    console.log('ynachhernorth ' + y)
-    console.log('c2nachhernorth ' + counter2)
-    console.log('cnachhernorth ' + counter)
+    console.log('north');
     res.send('worked')
 });
 
 app.put("/direction/south", async (req, res) => {
     var id;
-    console.log('idvorhersouth ' + id)
     var x = req.body.x;
-    console.log('xvorhersouth ' + x)
     var y = req.body.y;
-    console.log('yvorhersouth ' + y)
-    var counter2 = counter-1;
-    console.log('c2vorhersouth ' + counter2)
-    console.log('cvorhersouth ' + counter)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
-        await dbQuery("update details" + counter2 + " set richtung = 's' where zuganzahl = " + id).then(
-            connection.query("insert into details" + counter2 + " (position,durchlaufid) values ('x" + x + "/y" + y + "',1)")
+        await dbQuery("update details" + personId + "_" + detailsid + " set richtung = 's' where zuganzahl = " + id).then(
+            connection.query("insert into details" + personId + "_" + detailsid + " (position,durchlaufid) values ('x" + x + "/y" + y + "'," + detailsid + ")")
         );
     });
-    console.log('idnachhersouth ' + id)
-    console.log('xnachhersouth ' + x)
-    console.log('ynachhersouth ' + y)
-    console.log('c2nachhersouth ' + counter2)
-    console.log('cnachhersouth ' + counter)
+    console.log('south');
     res.send('worked')
 });
 
 app.put("/direction/east", async (req, res) => {
     var id;
-    console.log('idvorhereast ' + id)
     var x = req.body.x;
-    console.log('xvorhereast ' + x)
     var y = req.body.y;
-    console.log('yvorhereast ' + y)
-    var counter2 = counter-1;
-    console.log('c2vorhereast ' + counter2)
-    console.log('cvorhereast ' + counter)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
-        await dbQuery("update details" + counter2 + " set richtung = 'e' where zuganzahl = " + id).then(
-            connection.query("insert into details" + counter2 + " (position,durchlaufid) values ('x" + x + "/y" + y + "',1)")
+        await dbQuery("update details" + personId + "_" + detailsid + " set richtung = 'e' where zuganzahl = " + id).then(
+            connection.query("insert into details" + personId + "_" + detailsid + " (position,durchlaufid) values ('x" + x + "/y" + y + "'," + detailsid + ")")
         );
     });
-    console.log('idnachhereast ' + id)
-    console.log('xnachhereast ' + x)
-    console.log('ynachhereast ' + y)
-    console.log('c2nachhereast ' + counter2)
-    console.log('cnachhereast ' + counter)
+    console.log('east');
     res.send('worked')
 });
 
 app.put("/direction/west", async (req, res) => {
     var id;
-    console.log('idvorherwest ' + id)
     var x = req.body.x;
-    console.log('xvorherwest ' + x)
     var y = req.body.y;
-    console.log('yvorherwest ' + y)
-    var counter2 = counter-1;
-    console.log('c2vorherwest ' + counter2)
-    console.log('cvorherwest ' + counter)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
-        await dbQuery("update details" + counter2 + " set richtung = 'w' where zuganzahl = " + id).then(
-            connection.query("insert into details" + counter2 + " (position,durchlaufid) values ('x" + x + "/y" + y + "',1)")
+        await dbQuery("update details" + personId + "_" + detailsid + " set richtung = 'w' where zuganzahl = " + id).then(
+            connection.query("insert into details" + personId + "_" + detailsid + " (position,durchlaufid) values ('x" + x + "/y" + y + "'," + detailsid + ")")
         );
     });
-    console.log('idnachherwest ' + id)
-    console.log('xnachherwest ' + x)
-    console.log('ynachherwest ' + y)
-    console.log('c2nachherwest ' + counter2)
-    console.log('cnachherwest ' + counter)
+    console.log('west');
     res.send('worked')
 });
 
 app.patch("/look", async (req, res) => {
     var id;
-    var counter2 = counter-1;
     var symbol;
     console.log(req.body.lookDB)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
-        await dbQuery("select look from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+        await dbQuery("select look from details" + personId + "_" + detailsid + " where zuganzahl = " + id).then(rows => {
             symbol = rows[0].look
             console.log(symbol)
             if (symbol === 'x' || symbol === null) {
                 if (req.body.lookDB) {
-                    connection.query("update details" + counter2 + " set look='o' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set look='o' where zuganzahl = " + id)
                 } else {
-                    connection.query("update details" + counter2 + " set look='x' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set look='x' where zuganzahl = " + id)
                 }
             }
         }
@@ -288,20 +255,19 @@ app.patch("/look", async (req, res) => {
 
 app.patch("/use", async (req, res) => {
     var id;
-    var counter2 = counter-1;
     var symbol;
     console.log(req.body.useDB)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
-        await dbQuery("select apply from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+        await dbQuery("select apply from details" + personId + "_" + detailsid + " where zuganzahl = " + id).then(rows => {
             symbol = rows[0].apply
             console.log(symbol)
             if (symbol === 'x' || symbol === null) {
                 if (req.body.useDB) {
-                    connection.query("update details" + counter2 + " set apply='o' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set apply='o' where zuganzahl = " + id)
                 } else {
-                    connection.query("update details" + counter2 + " set apply='x' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set apply='x' where zuganzahl = " + id)
                 }
             }
         }
@@ -311,20 +277,19 @@ app.patch("/use", async (req, res) => {
 
 app.patch("/pickup", async (req, res) => {
     var id;
-    var counter2 = counter-1;
     var symbol;
     console.log(req.body.pickupDB)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
-        await dbQuery("select pickup from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+        await dbQuery("select pickup from details" + personId + "_" + detailsid + " where zuganzahl = " + id).then(rows => {
             symbol = rows[0].pickup
             console.log(symbol)
             if (symbol === 'x' || symbol === null) {
                 if (req.body.pickupDB) {
-                    connection.query("update details" + counter2 + " set pickup='o' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set pickup='o' where zuganzahl = " + id)
                 } else {
-                    connection.query("update details" + counter2 + " set pickup='x' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set pickup='x' where zuganzahl = " + id)
                 }
             }
         }
@@ -334,20 +299,19 @@ app.patch("/pickup", async (req, res) => {
 
 app.patch("/talk", async (req, res) => {
     var id;
-    var counter2 = counter-1;
     var symbol;
     console.log(req.body.talkDB)
-    await dbQuery("select zuganzahl FROM details" + counter2 + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
+    await dbQuery("select zuganzahl FROM details" + personId + "_" + detailsid + " ORDER BY zuganzahl DESC LIMIT 1;").then(async rows => {
         id = rows[0].zuganzahl
         console.log(id)
-        await dbQuery("select talk from details" + counter2 + " where zuganzahl = " + id).then(rows => {
+        await dbQuery("select talk from details" + personId + "_" + detailsid + " where zuganzahl = " + id).then(rows => {
             symbol = rows[0].talk
             console.log(symbol)
             if (symbol === 'x' || symbol === null) {
                 if (req.body.talkDB) {
-                    connection.query("update details" + counter2 + " set talk='o' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set talk='o' where zuganzahl = " + id)
                 } else {
-                    connection.query("update details" + counter2 + " set talk='x' where zuganzahl = " + id)
+                    connection.query("update details" + personId + "_" + detailsid + " set talk='x' where zuganzahl = " + id)
                 }
             }
         }
@@ -355,8 +319,29 @@ app.patch("/talk", async (req, res) => {
     });
 });
 
-/* let id = connection.query("select * from durchläufe where personId = ? order by id desc limit 1",
-[req.session.user.id]); */
+app.get("/history/:username", async (req, res) => {
+    var ergebnis;
+    var id;
+    try {
+        await dbQuery("SELECT personId FROM personen where username = ?;", [req.params.username]).then(async rows => {
+            personId = rows[0].personId;
+            await dbQuery("select id,ergebnis from durchläufe" + personId +" ORDER BY id DESC LIMIT 1;").then(async rows => {
+                id = rows[0].id
+                ergebnis = rows[0].ergebnis
+                await dbQuery("SELECT zuganzahl,look,pickup,apply,talk,richtung,position FROM details" + personId + "_" + id + ";")
+                .then(rows => {
+                    res.send({ergebnis: ergebnis, rows: rows})
+                })
+            })
+        });
+    } catch (err) {
+        console.log("something went wrong...", err);
+        res.sendStatus(500);
+    }
+    console.log("Finish!");
+});
+
+
 
 app.get("/logout", (req, res) => {
     req.session.destroy();
