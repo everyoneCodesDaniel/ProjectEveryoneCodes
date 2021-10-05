@@ -78,11 +78,6 @@
     <img class="picright" id="shield" src="/img/shield.png" onclick="shieldDescription()" hidden><br>
     <span class="spanleft" id="blueOrbText" hidden>Blue Orb</span>
     <span class="spanright" id="shieldText" hidden>Shield</span>
-    <br><br>
-    <img class="picleft" id="key9" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden>
-    <img class="picright" id="key10" src="/img/rustyKey.png" onclick="chatInput.value += ' key '" hidden><br>
-    <span class="spanleft" id="key9Text" hidden>Key</span>
-    <span class="spanright" id="key10Text" hidden>Key</span>
     <br><br><br><br>
 <div id="help">
     <h3 style="text-align: center;">Help</h3>
@@ -133,10 +128,10 @@
     var saveInput = new Boolean("true");
     var pathOK = new Boolean("false");
     var validUse = new Boolean("false");
-    var lookDB = new Boolean("false");
-    var pickupDB = new Boolean("false");
-    var useDB = new Boolean("false");
-    var talkDB = new Boolean("false");
+    var lookDB = new Boolean(false);
+    var pickupDB = new Boolean(false);
+    var useDB = new Boolean(false);
+    var talkDB = new Boolean(false);
     document.getElementById("X").innerHTML = x;
     document.getElementById("Y").innerHTML = y;
     var container = document.getElementById('canvas');
@@ -228,8 +223,8 @@
         setTimeout(function() {
             chatWindow.innerHTML = reserve;
             saveInput = !saveInput;
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
         }, 1000);
-        chatWindow.scrollTo(0,chatWindow.scrollHeight);
     }
 
     function drawPlayerLocation() {
@@ -251,7 +246,6 @@
     function drawEventLocation() {
         let eventX, eventY, radius;
         let circlefillColor;
-
         //---------------------------Events-------------------------->
         if (document.getElementById('X3/Y3').hidden == true) { //startSign
             eventX = (canvas.node.width / 6 ) * 3 - 90;
@@ -274,154 +268,9 @@
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        if (document.getElementById('X1/Y1').hidden == true) { //altarRed
-            eventX = (canvas.node.width / 6 ) * 1 - 60;
-            eventY = (canvas.node.height / 6 ) * 1 - 95;
-            circlefillColor = '#4b4846'; 
-            radius = 15;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X6/Y1').hidden == true) { //altarGreen
-            eventX = (canvas.node.width / 6 ) * 6 - 60;
-            eventY = (canvas.node.height / 6 ) * 1 - 95;
-            circlefillColor = '#4b4846'; 
-            radius = 15;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X4/Y4').hidden == true) { //altarBlue
-            eventX = (canvas.node.width / 6 ) * 4 - 60;
-            eventY = (canvas.node.height / 6 ) * 4 - 95;
-            circlefillColor = '#4b4846'; 
-            radius = 15;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X5/Y2').hidden == true) { //tree
-            eventX = (canvas.node.width / 6 ) * 5 - 60;
-            eventY = (canvas.node.height / 6 ) * 2 - 95;
-            circlefillColor = '#054709'; 
-            radius = 15;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X5/Y5').hidden == true) { //Pentagramm
-            eventX = (canvas.node.width / 6 ) * 5 - 60;
-            eventY = (canvas.node.height / 6 ) * 5 - 60;
-            circlefillColor = '#cc0707'; 
-            radius = 30;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-            drawPentagramm(eventX, eventY);
-        }
-        if (document.getElementById('X6/Y3').hidden == true) { //goldenKey Gate
-            eventX = (canvas.node.width / 6 ) * 6 - 110;
-            eventY = (canvas.node.height / 6 ) * 3 - 130;
-            rectangleColor = '#181513'; 
-            let l = 100;
-            let b = 20;
-            fillRectangle(eventX, eventY, l, b, rectangleColor);
-        }
-        if (document.getElementById('X1/Y4').hidden == true) { //finishGame Gate
-            eventX = (canvas.node.width / 6 ) * 1 - 120;
-            eventY = (canvas.node.height / 6 ) * 4 - 110;
-            rectangleColor = '#181513'; 
-            let l = 10;
-            let b = 100;
-            fillRectangle(eventX, eventY, l, b, rectangleColor);
-        }
-        //----------------------------Items-------------------------->
-        if (items[0][1] && document.getElementById('rustyKey').hidden == true) { //Key1
-            eventX = (canvas.node.width / 6 ) * 1 - 90;
-            eventY = (canvas.node.height / 6 ) * 3 - 30;
-            circlefillColor = '#FFD700'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (events[0][1] && document.getElementById('doll').hidden == true) { //doll
-            eventX = (canvas.node.width / 6 ) * 2 - 60;
-            eventY = (canvas.node.height / 6 ) * 3 - 95;
-            circlefillColor = '#FFD700'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X2/Y1').hidden == true) { //greenOrb
-            eventX = (canvas.node.width / 6 ) * 2 - 90;
-            eventY = (canvas.node.height / 6 ) * 1 - 30;
-            circlefillColor = '#FFD700'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (items[2][1] && document.getElementById('casket').hidden == true) { //Casket
-            eventX = (canvas.node.width / 6 ) * 2 - 90;
-            eventY = (canvas.node.height / 6 ) * 5 - 30;
-            circlefillColor = '#FFD700'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (items[7][1] && document.getElementById('shield').hidden == true) { //Shield
-            eventX = (canvas.node.width / 6 ) * 5 - 90;
-            eventY = (canvas.node.height / 6 ) * 1 - 30;
-            circlefillColor = '#FFD700'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (items[3][1] && document.getElementById('bottle').hidden == true) { //bottle
+        if (document.getElementById('X6/Y5').hidden == true) { //ritualSign
             eventX = (canvas.node.width / 6 ) * 6 - 90;
-            eventY = (canvas.node.height / 6 ) * 4 - 30;
-            circlefillColor = '#FFD700'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        //----------------------------NPCs--------------------------->
-        if (document.getElementById('X3/Y4').hidden == true) { //girl
-            eventX = (canvas.node.width / 6 ) * 3 - 30;
-            eventY = (canvas.node.height / 6 ) * 4 - 90;
-            circlefillColor = '#0f0cc5'; 
-            radius = 12;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X4/Y2').hidden == true) { //guy
-            eventX = (canvas.node.width / 6 ) * 4 - 30;
-            eventY = (canvas.node.height / 6 ) * 2 - 90;
-            circlefillColor = '#0f0cc5'; 
-            radius = 12;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X6/Y2').hidden == true) { //hunter
-            eventX = (canvas.node.width / 6 ) * 6 - 30;
-            eventY = (canvas.node.height / 6 ) * 2 - 90;
-            circlefillColor = '#0f0cc5'; 
-            radius = 12;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X4/Y6').hidden == true) { //cultist
-            eventX = (canvas.node.width / 6 ) * 4 - 30;
-            eventY = (canvas.node.height / 6 ) * 6 - 90;
-            circlefillColor = '#0f0cc5'; 
-            radius = 12;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-    }
-
-    function drawEventLocation() {
-        let eventX, eventY, radius;
-        let circlefillColor;
-
-        //---------------------------Events-------------------------->
-        if (document.getElementById('X3/Y3').hidden == true) { //startSign
-            eventX = (canvas.node.width / 6 ) * 3 - 90;
-            eventY = (canvas.node.height / 6 ) * 3 - 90;
-            circlefillColor = '#f0951d'; 
-            radius = 10;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X2/Y3').hidden == true) { //chest
-            eventX = (canvas.node.width / 6 ) * 2 - 60;
-            eventY = (canvas.node.height / 6 ) * 3 - 95;
-            circlefillColor = '#964B00'; 
-            radius = 15;
-            fillCircle(eventX, eventY, radius, circlefillColor);
-        }
-        if (document.getElementById('X2/Y2').hidden == true) { //codeSign
-            eventX = (canvas.node.width / 6 ) * 2 - 90;
-            eventY = (canvas.node.height / 6 ) * 2 - 90;
+            eventY = (canvas.node.height / 6 ) * 5 - 90;
             circlefillColor = '#f0951d'; 
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
@@ -463,20 +312,66 @@
             drawPentagramm(eventX, eventY);
         }
         if (document.getElementById('X6/Y3').hidden == true) { //goldenKey Gate
-            eventX = (canvas.node.width / 6 ) * 6 - 110;
-            eventY = (canvas.node.height / 6 ) * 3 - 130;
-            rectangleColor = '#181513'; 
-            let l = 100;
-            let b = 20;
-            fillRectangle(eventX, eventY, l, b, rectangleColor);
+            if (events[2][1]) {
+                eventX = (canvas.node.width / 6 ) * 6 - 110;
+                eventY = (canvas.node.height / 6 ) * 3 - 130;
+                rectangleColor = '#181513'; 
+                let l = 20;
+                let b = 20;
+                fillRectangle(eventX, eventY, l, b, rectangleColor);
+                eventX = (canvas.node.width / 6 ) * 6 - 30;
+                eventY = (canvas.node.height / 6 ) * 3 - 130;
+                fillRectangle(eventX, eventY, l, b, rectangleColor);
+            } else {
+                eventX = (canvas.node.width / 6 ) * 6 - 110;
+                eventY = (canvas.node.height / 6 ) * 3 - 130;
+                rectangleColor = '#181513'; 
+                let l = 100;
+                let b = 20;
+                fillRectangle(eventX, eventY, l, b, rectangleColor);
+            }
+        }
+        if (npc[3][2] && document.getElementById('X6/Y2').hidden == true) { //Hunterblood
+            eventX = (canvas.node.width / 6 ) * 6 - 60;
+            eventY = (canvas.node.height / 6 ) * 2 - 100;
+            circlefillColor = '#cc0707'; 
+            radius = 5;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+            eventX = (canvas.node.width / 6 ) * 6 - 30;
+            eventY = (canvas.node.height / 6 ) * 2 - 60;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+            eventX = (canvas.node.width / 6 ) * 6 - 40;
+            eventY = (canvas.node.height / 6 ) * 2 - 100;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+            eventX = (canvas.node.width / 6 ) * 6 - 20;
+            eventY = (canvas.node.height / 6 ) * 2 - 75;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+            eventX = (canvas.node.width / 6 ) * 6 - 45;
+            eventY = (canvas.node.height / 6 ) * 2 - 90;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+            eventX = (canvas.node.width / 6 ) * 6 - 40;
+            eventY = (canvas.node.height / 6 ) * 2 - 40;
+            fillCircle(eventX, eventY, radius, circlefillColor);
         }
         if (document.getElementById('X1/Y4').hidden == true) { //finishGame Gate
-            eventX = (canvas.node.width / 6 ) * 1 - 120;
-            eventY = (canvas.node.height / 6 ) * 4 - 110;
-            rectangleColor = '#181513'; 
-            let l = 10;
-            let b = 100;
-            fillRectangle(eventX, eventY, l, b, rectangleColor);
+            if (events[4][1] && events[5][1] && events[6][1]) {
+                eventX = (canvas.node.width / 6 ) * 1 - 120;
+                eventY = (canvas.node.height / 6 ) * 4 - 110;
+                rectangleColor = '#181513'; 
+                let l = 10;
+                let b = 20;
+                fillRectangle(eventX, eventY, l, b, rectangleColor);
+                eventX = (canvas.node.width / 6 ) * 1 - 120;
+                eventY = (canvas.node.height / 6 ) * 4 - 30;
+                fillRectangle(eventX, eventY, l, b, rectangleColor);
+            } else {
+                eventX = (canvas.node.width / 6 ) * 1 - 120;
+                eventY = (canvas.node.height / 6 ) * 4 - 110;
+                rectangleColor = '#181513'; 
+                let l = 10;
+                let b = 100;
+                fillRectangle(eventX, eventY, l, b, rectangleColor);
+            }
         }
         //----------------------------Items-------------------------->
         if (items[0][1] && document.getElementById('rustyKey').hidden == true) { //Key1
@@ -501,8 +396,15 @@
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
         if (items[9][3] && !items[4][2] && document.getElementById('X5/Y5').hidden == true) { //redOrb
-            eventX = (canvas.node.width / 6 ) * 2 - 90;
-            eventY = (canvas.node.height / 6 ) * 1 - 30;
+            eventX = (canvas.node.width / 6 ) * 5 - 90;
+            eventY = (canvas.node.height / 6 ) * 5 - 30;
+            circlefillColor = '#FFD700'; 
+            radius = 10;
+            fillCircle(eventX, eventY, radius, circlefillColor);
+        }
+        if (items[6][1] && !items[6][2] && document.getElementById('X4/Y6').hidden == true) { //blueOrb
+            eventX = (canvas.node.width / 6 ) * 4 - 90;
+            eventY = (canvas.node.height / 6 ) * 6 - 30;
             circlefillColor = '#FFD700'; 
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
@@ -550,7 +452,7 @@
             radius = 12;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        if (document.getElementById('X4/Y6').hidden == true) { //cultist
+        if (!items[6][1] && document.getElementById('X4/Y6').hidden == true) { //cultist
             eventX = (canvas.node.width / 6 ) * 4 - 30;
             eventY = (canvas.node.height / 6 ) * 6 - 90;
             circlefillColor = '#0f0cc5'; 
@@ -650,7 +552,7 @@
         items.push(["bottle", false, false, false]);
         items.push(["redorb", true, false, false]);
         items.push(["greenorb", true, false, false]);
-        items.push(["blueorb", true, false, false]);
+        items.push(["blueorb", false, false, false]);
         items.push(["shield", false, false, false]);
         items.push(["goldenkey", true, false, false]);
         items.push(["redliquid", true, false, false]);
@@ -664,10 +566,10 @@
         events.push(["altarGreen", false]);
         events.push(["altarBlue", false]);
         //-----------------NPCs--------------------->
-        npc.push(["girl", false]);
-        npc.push(["guy", false]);
-        npc.push(["hunter", false]);
-        npc.push(["cultist", false]);
+        npc.push(["girl", false, false]);
+        npc.push(["guy", false, false]);
+        npc.push(["hunter", false, false]);
+        npc.push(["cultist", false, false]);
     };
 
     async function exitGame() {
@@ -691,6 +593,7 @@
 
     async function wonGame() {
         console.log("won");
+        confirm("Congratulations! You won the game!");
         player = null || sessionStorage.getItem("player")
         if (player !== null) {
         var url = new URL(window.location.origin + '/wongame');
