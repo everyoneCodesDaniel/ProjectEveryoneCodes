@@ -11,13 +11,6 @@ body {
     color: white;
 }
 
-.button {
-    padding: 5px 5px;
-    font-family: Monaco, monospace;
-    font-weight: bold;
-    font-size: medium;
-}
-
 h2 {
     color: white;
     text-align: right;
