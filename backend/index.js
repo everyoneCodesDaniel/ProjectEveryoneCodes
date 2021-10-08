@@ -122,6 +122,7 @@ app.put("/startgame/:username", async (req, res) => {
 
             })
         });
+        console.log("Details created!");
         res.send('worked')
     } catch (err) {
         console.log("something went wrong...", err);

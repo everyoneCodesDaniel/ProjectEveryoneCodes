@@ -78,16 +78,21 @@ h2 {
 }
 
 .spanleft {
-    float: left;
+    text-align: left;
     padding-left: 60px;
 }
 
 .spanright {
     float: right;
-    padding-right: 60px;
+    text-align: right;
 }
 
 .gameMap {
+    position:absolute;
+    z-index:-3;
+}
+
+.monster {
     position:absolute;
     z-index:-2;
 }

@@ -8,7 +8,29 @@
 <link rel="stylesheet" type="text/css" href="game.css">
 
 </head>
-<body onload="checkPlayer()">
+<body onload="javascript:startMonolog();checkPlayer();">
+
+<audio id="music" controls>
+    <source src="/sound/backgroundMusic.ogg" type="audio/ogg">
+</audio>
+<audio id="monsterSound">
+    <source src="/sound/monster.ogg" type="audio/ogg">
+</audio>
+<audio id="blockSound">
+    <source src="/sound/shield.ogg" type="audio/ogg">
+</audio>
+<audio id="slashSound">
+    <source src="/sound/slash.ogg" type="audio/ogg">
+</audio>
+<audio id="splatSound">
+    <source src="/sound/splat.ogg" type="audio/ogg">
+</audio>
+<audio id="screamSound">
+    <source src="/sound/scream.ogg" type="audio/ogg">
+</audio>
+<audio id="WinSound">
+    <source src="/sound/applause.ogg" type="audio/ogg">
+</audio>
 
 <div id="canvas">
     <img class="gameMap" src="/img/Abandoned_Map.png" >
@@ -16,11 +38,13 @@
     <img class="mapCover" id="X1/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 0px">
     <img class="mapCover" id="X2/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 120px">
     <img class="mapCover" id="X3/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 240px">
+    <img class="monster" id="monster1" src="/img/skull.png" style="vertical-align:middle;margin:0px 240px">
     <img class="mapCover" id="X4/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 360px">
     <img class="mapCover" id="X5/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 480px">
     <img class="mapCover" id="X6/Y1" src="/img/Cover.png" style="vertical-align:middle;margin:0px 600px">
 
     <img class="mapCover" id="X1/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 0px">
+    <img class="monster" id="monster2" src="/img/skull.png" style="vertical-align:middle;margin:120px 0px">
     <img class="mapCover" id="X2/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 120px">
     <img class="mapCover" id="X3/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 240px">
     <img class="mapCover" id="X4/Y2" src="/img/Cover.png" style="vertical-align:middle;margin:120px 360px">
@@ -38,6 +62,7 @@
 
     <img class="mapCover" id="X1/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 0px">
     <img class="mapCover" id="X2/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 120px">
+    <img class="monster" id="monster3" src="/img/skull.png" style="vertical-align:middle;margin:360px 120px">
     <img class="mapCover" id="X3/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 240px">
     <img class="mapCover" id="X4/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 360px">
     <img class="mapCover" id="X5/Y4" src="/img/Cover.png" style="vertical-align:middle;margin:360px 480px">
@@ -53,9 +78,11 @@
     <img class="mapCover" id="X1/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 0px">
     <img class="mapCover" id="X2/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 120px">
     <img class="mapCover" id="X3/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 240px">
+    <img class="monster" id="monster4" src="/img/skull.png" style="vertical-align:middle;margin:600px 240px">
     <img class="mapCover" id="X4/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 360px">
     <img class="mapCover" id="X5/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 480px">
     <img class="mapCover" id="X6/Y6" src="/img/Cover.png" style="vertical-align:middle;margin:600px 600px">
+    <img class="monster" id="monster5" src="/img/skull.png" style="vertical-align:middle;margin:600px 600px">
 </div>
 
 <div id="inventory">
@@ -66,8 +93,8 @@
     <span class="spanright" id="dollText" hidden>Doll</span>
     <br><br>
     <img class="picleft" id="casket" src="/img/casket.png" onclick="casket()" hidden>
-    <img class="picright" id="bottle" src="/img/bottle.png" onclick="bottle()" hidden><br>
-    <span class="spanleft" id="casketText" hidden>Casket</span>
+    <img class="picright" id="bottle" src="/img/bottle.png" onclick="bottle()" hidden>
+    <br><span class="spanleft" id="casketText" hidden>Casket</span>
     <span class="spanright" id="bottleText" hidden>Bottle</span>
     <br><br>
     <img class="picleft" id="redOrb" src="/img/redOrb.png" onclick="chatInput.value += ' redOrb '" hidden>
@@ -123,11 +150,17 @@
 <script>
     //------------------Initialisation--------------------->
     username = sessionStorage.getItem("player") || "guest";
+    var music = document.getElementById("music");
     var x = 3, y = 3, input;
     var items = [], events = [], npc = [];
     generateEvents();
     var saveInput = true;
     var pathOK = false;
+    var northOK = false;
+    var southOK = false;
+    var eastOK = false;
+    var westOK = false;
+    var specialEvent = false;
     var validUse = false;
     var lookDB = false;
     var pickupDB = false;
@@ -138,6 +171,9 @@
     var container = document.getElementById('canvas');
     initCanvas(container);
     //----------------------------------------------------->
+
+    function playMusic() {
+        music.loop = true;
 
     function checkPlayer() {
         var player = null || sessionStorage.getItem("player");
@@ -153,7 +189,7 @@
             document.getElementById('test').hidden = true;
             document.getElementById('exit').hidden = true;
             document.getElementById('won').hidden = true;
-    }
+        }
     }
 
     function clamp(number, min, max) {
@@ -166,7 +202,14 @@
             var chatWindow = document.getElementById("chatWindow");
             if (chatInput.value.trim().length > 0) {
                 var msg = chatInput.value;
-                input = input.split(" ");
+                input = input.split(' ');
+                console.log("input1: " + input);
+                for (var i = 1; i < input.length-1; i++) {
+                    if (input[i] == " " || input[i] == "") {
+                        input.splice(i, 1);
+                        console.log("input: " + i);
+                    }
+                }
                 if (chatInput.value.startsWith("/")) {
                     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML +
                         "<i> " + username + ": </i></b>" +
@@ -215,7 +258,11 @@
                     }
                     if (validUse) {
                         console.log("Cellaction");
-                        cellAction();
+                        if (input[0] == "use" &&  input[1] == "casket" || input[0] == "casket" && input[1] == "use") { //---Use-Casket--->
+                            casket();
+                        } else {
+                            cellAction();
+                        }
                     } else {
                         incorrectInput();
                     }
@@ -722,7 +769,7 @@
                     })
             }
             lookDB = false;
-            pickupDB = false; 
+            pickupDB = false;
             useDB = false;
             talkDB = false;
         }
