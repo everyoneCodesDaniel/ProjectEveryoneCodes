@@ -30,6 +30,7 @@ function cellAction() {
             if (items[4][2] && !items[4][3]) {
                 items[4][3] = true;
                 events[4][1] = true;
+                scorePoints += 500;
                 document.getElementById('redOrb').src='/img/redOrb_used.png';
                 let blockMessage = "I put the red orb on the altar. It starts glowing!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -58,6 +59,7 @@ function cellAction() {
         if (input == "pickup") {
             if (!items[5][2]) {//---Green-Orb--->
                 items[5][2] = true;
+                scorePoints += 100;
                 document.getElementById('greenOrb').style.opacity = "1";
                 document.getElementById('greenOrbText').hidden = false;
                 confirm("You got a green orb!");
@@ -136,6 +138,7 @@ function cellAction() {
         if (input == "pickup") {
             if (!items[7][2]) {//---Shield--->
                 items[7][2] = true;
+                scorePoints += 100;
                 document.getElementById('shield').style.opacity = "1";
                 document.getElementById('shieldText').hidden = false;
                 confirm("You got a shield!");
@@ -177,6 +180,7 @@ function cellAction() {
             if (items[5][2] && !items[5][3]) {
                 items[5][3] = true;
                 events[5][1] = true;
+                scorePoints += 500;
                 document.getElementById('greenOrb').src='/img/greenOrb_used.png';
                 let blockMessage = "I put the green orb on the altar. It starts glowing!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -304,6 +308,7 @@ function cellAction() {
                         saveInput = !saveInput;
                     }, 2000);
                 } else {
+                    scorePoints += 200;
                     let npcName = "Guy";
                     let blockMessage = "Hey, I got lost in the woods, I need to find a way out!";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -350,6 +355,7 @@ function cellAction() {
                 items[3][3] = true;
                 items[9][2] = true;
                 events[1][1] = true;
+                scorePoints += 300;
                 document.getElementById('bottle').src='/img/redLiquid.png';
                 document.getElementById('bottleText').textContent="RedLiquid";
                 document.getElementById('bottleText').style.paddingRight = "14px"
@@ -408,6 +414,7 @@ function cellAction() {
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     saveInput = !saveInput;
                 } else {
+                    scorePoints += 200;
                     let npcName = "Hunter";
                     let blockMessage = "What are you doing here?";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -454,6 +461,7 @@ function cellAction() {
         if (input == "pickup") {
             if (!items[0][2]) {//---RustyKey--->
                 items[0][2] = true;
+                scorePoints += 100;
                 document.getElementById('rustyKey').style.opacity = "1";
                 document.getElementById('rustyKeytext').hidden = false;
                 confirm("You got a Rusty Key!");
@@ -489,6 +497,7 @@ function cellAction() {
         if (input == "pickup") { //---Doll--->
             if (events[0][1] && !items[1][2]) {
                 items[1][2] = true;
+                scorePoints += 100;
                 document.getElementById('doll').style.opacity = "1";
                 document.getElementById('dollText').hidden = false;
                 confirm("You got a doll!");
@@ -499,6 +508,7 @@ function cellAction() {
             if (items[0][2] && !items[0][3]) {
                 items[0][3] = true;
                 events[0][1] = true;
+                scorePoints += 300;
                 document.getElementById('rustyKey').src='/img/rustyKey_used.png';
                 let blockMessage = "I opened the chest with the key! There is a doll inside!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -564,9 +574,11 @@ function cellAction() {
     if ( x == 5 && y == 3) {
         passableDir_NSEW();
         if (input == "look") {
-            if (false) {
-
-            } else { nothingToLook(); }
+            let info = "Info";
+            let blockMessage = "You can use items by clicking on the icon in the inventory.";
+            chatWindow.innerHTML += "<p><b>" + "<i> " + info.fontcolor("darkyellow") + ": </i></b>" + blockMessage + "</p>";
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
+            lookDB = true;
         }
         if (input == "pickup") {
             if (false) {
@@ -699,6 +711,7 @@ function cellAction() {
             if (items[1][2] && !items[1][3]) {
                 items[1][3] = true;
                 npc[0][2] = true;
+                scorePoints += 400;
                 document.getElementById('doll').src='/img/doll_used.png';
                 drawEventLocation()
                 saveInput = !saveInput;
@@ -732,6 +745,7 @@ function cellAction() {
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     saveInput = !saveInput;
                 } else {
+                    scorePoints += 200;
                     let npcName = "Girl";
                     let blockMessage = "Hello! What does a little girl like you do alone in the woods?";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -771,6 +785,7 @@ function cellAction() {
             if (items[6][2] && !items[6][3]) {
                 items[6][3] = true;
                 events[6][1] = true;
+                scorePoints += 500;
                 document.getElementById('blueOrb').src='/img/blueOrb_used.png';
                 let blockMessage = "I put the blue orb on the altar. It starts glowing!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -823,6 +838,7 @@ function cellAction() {
         if (input == "pickup") {
             if (!items[3][2]) {//---bottle--->
                 items[3][2] = true;
+                scorePoints += 100;
                 document.getElementById('bottle').style.opacity = "1";
                 document.getElementById('bottleText').hidden = false;
                 confirm("You got a bottle!");
@@ -879,6 +895,7 @@ function cellAction() {
         if (input == "pickup") {
             if (!items[2][2]) {//---Casket--->
                 items[2][2] = true;
+                scorePoints += 100;
                 document.getElementById('casket').style.opacity = "1";
                 document.getElementById('casketText').hidden = false;
                 confirm("You got a casket!");
@@ -960,6 +977,7 @@ function cellAction() {
         if (input == "pickup") { //---Red-Orb--->
             if (events[3][1] && !items[4][2]) {
                 items[4][2] = true;
+                scorePoints += 100;
                 document.getElementById('redOrb').style.opacity = "1";
                 document.getElementById('redOrbText').hidden = false;
                 confirm("You got a Red Orb!");
@@ -970,6 +988,7 @@ function cellAction() {
             if (items[9][2] && !items[9][3]) {
                 items[9][3] = true;
                 events[3][1] = true;
+                scorePoints += 300;
                 document.getElementById('bottle').src='/img/redLiquid_used.png';
                 let blockMessage = "The deepenings at the bottom begin to fill with the red liquid! A red orb appears.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -1099,6 +1118,7 @@ function cellAction() {
         if (input == "pickup") {
             if (items[6][1] && !items[6][2]) {
                 items[6][2] = true;
+                scorePoints += 100;
                 document.getElementById('blueOrb').style.opacity = "1";
                 document.getElementById('blueOrbText').hidden = false;
                 confirm("You got a Blue Orb!");
@@ -1127,6 +1147,7 @@ function cellAction() {
                         saveInput = !saveInput;
                     }, 2500);
                 } else {
+                    scorePoints += 200;
                     let npcName = "Cultist";
                     let blockMessage = "You look really strange. What are you doing here?";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -1209,15 +1230,14 @@ function cellAction() {
     }
     //#endregion
     //----------------------------->
-    if (input == "north" && pathOK) {y = clamp(y-1, 1, 6); document.getElementById("Y").innerHTML = y; drawPlayerLocation();updatedb(input);}
-    else if (input == "south" && pathOK) {y = clamp(y+1, 1, 6); document.getElementById("Y").innerHTML = y; drawPlayerLocation();updatedb(input);}
-    else if (input == "east" && pathOK) {x = clamp(x+1, 1, 6); document.getElementById("X").innerHTML = x; drawPlayerLocation();updatedb(input);}
-    else if (input == "west" && pathOK) {x = clamp(x-1, 1, 6); document.getElementById("X").innerHTML = x; drawPlayerLocation();updatedb(input);}
+    if (input == "north" && pathOK) {y = clamp(y-1, 1, 6); document.getElementById("Y").innerHTML = y; drawPlayerLocation();updatedb(input);pathMonolog();turns++;}
+    else if (input == "south" && pathOK) {y = clamp(y+1, 1, 6); document.getElementById("Y").innerHTML = y; drawPlayerLocation();updatedb(input);pathMonolog();turns++;}
+    else if (input == "east" && pathOK) {x = clamp(x+1, 1, 6); document.getElementById("X").innerHTML = x; drawPlayerLocation();updatedb(input);pathMonolog();turns++;}
+    else if (input == "west" && pathOK) {x = clamp(x-1, 1, 6); document.getElementById("X").innerHTML = x; drawPlayerLocation();updatedb(input);pathMonolog();turns++;}
     else if (input == "north" || input == "south" || input == "east" || input == "west") {blockedPath();}
     if (input == "look" || input == "pickup" || input.includes('use') || input == "talk") {updatedb(input);}
     if ( x == 1 && y == 4 && input == "west" && pathOK && events[4][1] && events[5][1] && events[6][1]) { wonGame(); }
     monsterAttack();
-    pathMonolog();
     chatWindow.scrollTo(0,chatWindow.scrollHeight);
 }
 
@@ -1404,6 +1424,8 @@ function noTalk() {
 function casket() { //caskest && goldenkey
     if (items[8][2]) {  
         chatInput.value += ' goldenKey ';
+        chatWindow.scrollTo(0,chatWindow.scrollHeight);
+        document.getElementById("chatInput").focus();
     } else {
         let code = prompt("It won´t open, but it has a combination lock!");
         if (code == "42763") {
@@ -1438,6 +1460,7 @@ function girlName() { //girlname
     if (code == "lotty" || code == "Lotty") {
         console.log("Richtig!");
         npc[1][2] = true;
+        scorePoints += 400;
         setTimeout(function() {
             let npcName = "Guy";
             blockMessage = "That seems to be right! <br>I found a paper with the numbers 42763 written on it. Maybe they are useful.";
@@ -1461,6 +1484,7 @@ function hunterLocation() { //hunterLocation
         console.log("Richtig!");
         npc[3][2] = true;
         items[6][1] = true;
+        scorePoints += 400;
         setTimeout(function() {
             let npcName = "Cultist";
             blockMessage = "Praised be Cthulhu! I get on my way to find the hunter!";
@@ -1488,6 +1512,7 @@ function hunterLocation() { //hunterLocation
         } else {
             console.log("Falsch!");
             items[6][1] = true;
+            scorePoints += 200;
             setTimeout(function() {
                 let npcName = "Cultist";
                 blockMessage = "Praised be Cthulhu! I get on my way to find the hunter!";
@@ -1514,6 +1539,7 @@ function bottle() { //bottle & red liquid
         chatInput.value += ' bottle '
     }
     chatWindow.scrollTo(0,chatWindow.scrollHeight);
+    document.getElementById("chatInput").focus();
 }
 
 function shieldDescription() {
@@ -1546,48 +1572,154 @@ function startMonolog() {
                 chatWindow.scrollTo(0, chatWindow.scrollHeight);
                 playMusic();
                 saveInput = !saveInput;
-            }, 2000);
+            }, 1500);
         }, 1000);
     }, 1000);
 }
 
 function pathMonolog() {
-    specialMonolog();
+    checkNewPath()
+    hiddenItem();
     if (northOK) {
-        checkNorth();
-        if (specialEvent) {
-
-        } else {
-
-        }
-        specialEvent = false;
+        monsterNorth();
     }
     if (southOK) {
-        
+        monsterSouth();
     }
     if (eastOK) {
-        
+        monsterEast();
     }
     if (westOK) {
-        
+        monsterWest();
     }
-    
 }
 
-function specialMonolog() {
-    
-}
-
-function checkNorth() {
-    var checkX = x, checkY = y;
-    
-}
-
-function eventPlace() {
-    if ( x == 1 && y == 1) {
-        
+function hiddenItem() {
+    if ( x == 5 && y == 1) { //---Shield--->
+        if (!items[7][2]) {
+            let blockMessage = "There is a pile of scrap metal on the ground. Maybe something is useful.";
+            chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("#999900") + "</p>";
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
+        }
     }
-    
+    if ( x == 1 && y == 3) { //---Rusty-Key--->
+        if (!items[0][2]) {
+            let blockMessage = "Is there a piece of metal on the ground?";
+            chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("#999900") + "</p>";
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
+        }
+    }
+    if ( x == 6 && y == 4) { //---Bottle--->
+        if (!items[3][2]) {
+            let blockMessage = "Something on the ground catches my eye.";
+            chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("#999900") + "</p>";
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
+        }
+    }
+    if ( x == 2 && y == 5) { //---Casket--->
+        if (!items[2][2]) {
+            let blockMessage = "Did I just stumble upon something?";
+            chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("#999900") + "</p>";
+            chatWindow.scrollTo(0,chatWindow.scrollHeight);
+        }
+    }
+}
+
+function monsterNorth() {
+    var checkX = x, checkY = y-1, dir = "north";
+    monsterLocation(checkX, checkY, dir);
+}
+
+function monsterSouth() {
+    var checkX = x, checkY = y+1, dir = "south";
+    monsterLocation(checkX, checkY, dir);
+}
+
+function monsterEast() {
+    var checkX = x+1, checkY = y, dir = "east";
+    monsterLocation(checkX, checkY, dir);
+}
+
+function monsterWest() {
+    var checkX = x-1, checkY = y, dir = "west";
+    monsterLocation(checkX, checkY, dir);
+}
+
+function monsterLocation(mX, mY, dir) {
+    if ( mX == 3 && mY == 1) {
+        monsterWarning(dir);
+    }
+    if ( mX == 1 && mY == 2) {
+        monsterWarning(dir);
+    }
+    if ( mX == 2 && mY == 4) {
+        monsterWarning(dir);
+    }
+    if ( mX == 3 && mY == 6) {
+        monsterWarning(dir);
+    }
+    if ( mX == 6 && mY == 6) {
+        monsterWarning(dir);
+    }
+}
+
+function monsterWarning(dir) {
+    saveInput = !saveInput;
+    var rngMessage = Math.floor(Math.random() * 4) + 1;
+    if (rngMessage == "1") {var blockMessage = "I hear a monster scream in the " + dir + ".";}
+    if (rngMessage == "2") {var blockMessage = "There is a dangerous aura coming from the " + dir + ".";}
+    if (rngMessage == "3") {var blockMessage = "A bloody smell comes from the " + dir + ".";}
+    if (rngMessage == "4") {var blockMessage = "A voice in my head is telling me not to go " + dir + ".";}
+    setTimeout(function() {
+        chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i>" + blockMessage.fontcolor("#d60024") + "</b></p>";
+        chatWindow.scrollTo(0,chatWindow.scrollHeight);
+        setTimeout(function() {
+            saveInput = !saveInput;
+        }, 500);
+    }, 1000);
+}
+
+function checkNewPath() {
+    northOK = false;
+    southOK = false;
+    eastOK = false;
+    westOK = false;
+    if ( x == 1 && y == 1) {passableDir_E();}
+    if ( x == 2 && y == 1) {passableDir_SW();}
+    if ( x == 3 && y == 1) {passableDir_SE();}
+    if ( x == 4 && y == 1) {passableDir_SEW();}
+    if ( x == 5 && y == 1) {passableDir_W();}
+    if ( x == 6 && y == 1) {passableDir_S();}
+    if ( x == 1 && y == 2) {passableDir_SE();}
+    if ( x == 2 && y == 2) {passableDir_NEW();}
+    if ( x == 3 && y == 2) {passableDir_NSW();}
+    if ( x == 4 && y == 2) {passableDir_NSE();}
+    if ( x == 5 && y == 2) {passableDir_SW();}
+    if ( x == 6 && y == 2) {passableDir_NS();}
+    if ( x == 1 && y == 3) {passableDir_NE();}
+    if ( x == 2 && y == 3) {passableDir_EW();}
+    if ( x == 3 && y == 3) {passableDir_NSEW();}
+    if ( x == 4 && y == 3) {passableDir_NEW();}
+    if ( x == 5 && y == 3) {passableDir_NSEW();}
+    if ( x == 6 && y == 3) {passableDir_NSW();}
+    if ( x == 1 && y == 4) {passableDir_S();}
+    if ( x == 2 && y == 4) {passableDir_SE();}
+    if ( x == 3 && y == 4) {passableDir_NSEW();}
+    if ( x == 4 && y == 4) {passableDir_SW();}
+    if ( x == 5 && y == 4) {passableDir_NSE();}
+    if ( x == 6 && y == 4) {passableDir_NW();}
+    if ( x == 1 && y == 5) {passableDir_NS();}
+    if ( x == 2 && y == 5) {passableDir_NSE();}
+    if ( x == 3 && y == 5) {passableDir_NSW();}
+    if ( x == 4 && y == 5) {passableDir_NE();}
+    if ( x == 5 && y == 5) {passableDir_NSEW();}
+    if ( x == 6 && y == 5) {passableDir_SW();}
+    if ( x == 1 && y == 6) {passableDir_NE();}
+    if ( x == 2 && y == 6) {passableDir_NEW();}
+    if ( x == 3 && y == 6) {passableDir_NW();}
+    if ( x == 4 && y == 6) {passableDir_E();}
+    if ( x == 5 && y == 6) {passableDir_NEW();}
+    if ( x == 6 && y == 6) {passableDir_NW();}
 }
 
 function monsterAttack() {
@@ -1606,6 +1738,7 @@ function monsterAttack() {
     if (dead && items[7][2] && !items[7][3]) {
         items[7][3] = true;
         hitBlocked = true;
+        scorePoints += 300;
         saveInput = !saveInput;
         setTimeout(function() {
             block.play();
