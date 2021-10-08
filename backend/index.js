@@ -134,11 +134,11 @@ app.put("/startgame/:username", async (req, res) => {
 app.delete("/deleteAll", async (req, res) => {
     try {
         await dbQuery("SET FOREIGN_KEY_CHECKS = 0;");
-        for (var deleteDB = 0; deleteDB <= 10; deleteDB++) {
+        for (var deleteDB = 0; deleteDB <= 30; deleteDB++) {
             await dbQuery("drop table if exists durchläufe" + deleteDB + ";");
         }
-        for (var deleteDB2 = 0; deleteDB2 <= 10; deleteDB2++) {
-            for (var deleteDB3 = 0; deleteDB3 <= 10; deleteDB3++) {
+        for (var deleteDB2 = 0; deleteDB2 <= 30; deleteDB2++) {
+            for (var deleteDB3 = 0; deleteDB3 <= 30; deleteDB3++) {
                 await dbQuery("drop table if exists details" + deleteDB2 + "_" + deleteDB3 +";");
             }
         }
