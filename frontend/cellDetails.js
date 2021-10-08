@@ -666,7 +666,7 @@ function cellAction() {
     if ( x == 3 && y == 4) {
         passableDir_NSEW();
         if (input == "look") {
-            let blockMessage = "(A little girl? What is it doing here?)";
+            let blockMessage = "(A little girl? What is she doing here?)";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -1112,7 +1112,7 @@ function cellAction() {
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     setTimeout(function() {
-                        blockMessage = "I am preparing a ritual for our true God. I´m looking for the hunter, he somewhere around here.";
+                        blockMessage = "I am preparing a ritual for our true God. I´m looking for the hunter, he is somewhere around here.";
                         chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                         chatWindow.scrollTo(0,chatWindow.scrollHeight);
                         setTimeout(function() {
