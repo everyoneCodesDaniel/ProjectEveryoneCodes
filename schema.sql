@@ -16,9 +16,10 @@ create table personen (
 
 create table durchläufe (
 id int primary key auto_increment,
-ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('gewonnen', 'verloren')),
+ergebnis VARCHAR(10) DEFAULT NULL check (ergebnis in ('won', 'lost')),
 zuganzahl int DEFAULT 0,
 personId int not NULL,
+score int default 0,
 constraint durchlauf foreign key (personId) REFERENCES personen (personId)
 );
 
