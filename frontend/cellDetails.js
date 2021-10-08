@@ -15,7 +15,7 @@ function cellAction() {
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("red") + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
             } else {
-                let blockMessage = "I already put the red orb in the circular indentation.";
+                let blockMessage = "I already put the red orb into the circular indentation.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
             }
@@ -49,7 +49,7 @@ function cellAction() {
         passableDir_SW();
         if (input == "look") {
             if (!items[5][2]) { //---Green-Orb--->
-                let blockMessage = "There is a green orb on the ground!";
+                let blockMessage = "There is a green orb lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -127,7 +127,7 @@ function cellAction() {
         if (input == "look") {
             if (!items[7][2]) { //---Shield--->
                 items[7][1] = true;
-                let blockMessage = "There is a shield on the ground!";
+                let blockMessage = "There is a shield lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -162,7 +162,7 @@ function cellAction() {
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("green") + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
             } else {
-                let blockMessage = "I already put the green orb in the circular indentation.";
+                let blockMessage = "I already put the green orb into the circular indentation.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
             }
@@ -269,7 +269,7 @@ function cellAction() {
     if ( x == 4 && y == 2) {
         passableDir_NSE();
         if (input == "look") {
-            let blockMessage = "(What does this man doing here? Maybe he knows how to get out of this forest.)";
+            let blockMessage = "(What is this man doing here? Maybe he knows how to get out of this forest.)";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -289,7 +289,7 @@ function cellAction() {
             talkDB = true;
             if (npc[1][2]) {
                 let npcName = "Guy";
-                let blockMessage = "I found this paper with the numbers 42763. Maybe you have a use for it.";
+                let blockMessage = "I found this paper with the numbers 42763 written on it. Maybe you have a use for it.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 saveInput = !saveInput;
@@ -309,7 +309,7 @@ function cellAction() {
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     setTimeout(function() {
-                        blockMessage = "What a coincidence, I´m also need to find something out!";
+                        blockMessage = "What a coincidence, I also need to get out of the maze!";
                         chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                         chatWindow.scrollTo(0,chatWindow.scrollHeight);
                         setTimeout(function() {
@@ -335,7 +335,7 @@ function cellAction() {
     if ( x == 5 && y == 2) {
         passableDir_SW();
         if (input == "look") {
-            let blockMessage = "A big tree. In front of it is a red puddle.";
+            let blockMessage = "A big tree. In front of it there is a red puddle.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -369,12 +369,12 @@ function cellAction() {
         passableDir_NS();
         if (input == "look") {
             if (npc[3][2]) {
-                let blockMessage = "(Oh my God! He killed the hunter! I shouldn't have told him where he is...)";
+                let blockMessage = "(Oh my God! The cultist killed the hunter! I shouldn't have told him where he is...)";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
             } else {
-                let blockMessage = "(A Hunter? Why is he hiding in here?)";
+                let blockMessage = "(A hunter? Why is he hiding in here?)";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -424,7 +424,7 @@ function cellAction() {
                                 chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                                 setTimeout(function() {
-                                    blockMessage = "I am not going to say you are hiding here!";
+                                    blockMessage = "I am not going to tell him you are hiding here!";
                                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                                     npc[2][1] = true;
@@ -444,7 +444,7 @@ function cellAction() {
         if (input == "look") {
             if (!items[0][2]) { //---RustyKey--->
                 items[0][1] = true;
-                let blockMessage = "There is a key on the ground!";
+                let blockMessage = "There is a key lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -684,7 +684,7 @@ function cellAction() {
     if ( x == 3 && y == 4) {
         passableDir_NSEW();
         if (input == "look") {
-            let blockMessage = "(A little girl? What does she do here?)";
+            let blockMessage = "(A little girl? What is she doing here?)";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -732,7 +732,7 @@ function cellAction() {
                     saveInput = !saveInput;
                 } else {
                     let npcName = "Girl";
-                    let blockMessage = "Hello! What does a little girl like you alone in the woods?";
+                    let blockMessage = "Hello! What does a little girl like you do alone in the woods?";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     setTimeout(function() {
@@ -755,7 +755,7 @@ function cellAction() {
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + altarMessage.fontcolor("blue") + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
             } else {
-                let blockMessage = "I already put the blue orb in the circular indentation.";
+                let blockMessage = "I already put the blue orb into the circular indentation.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
             }
@@ -813,7 +813,7 @@ function cellAction() {
         if (input == "look") {
             if (!items[3][2]) { //---bottle--->
                 items[3][1] = true;
-                let blockMessage = "There is an empty bottle on the ground!";
+                let blockMessage = "There is an empty bottle lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -869,7 +869,7 @@ function cellAction() {
         if (input == "look") {
             if (!items[2][2]) { //---Casket--->
                 items[2][1] = true;
-                let blockMessage = "There is a casket on the ground!";
+                let blockMessage = "There is a casket lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -950,7 +950,7 @@ function cellAction() {
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
             } else if (!items[4][2]) { //---Red-Orb--->
-                let blockMessage = "There is a red orb on the ground!";
+                let blockMessage = "There is a red orb lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -987,7 +987,7 @@ function cellAction() {
         passableDir_SW();
         if (input == "look") {
             let info = "Info";
-            let blockMessage = "One needs offerings for rituals. Blood or the like is sufficient.";
+            let blockMessage = "One needs offerings for certain rituals. Blood or something similar is sufficient.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + info.fontcolor("darkyellow") + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -1084,12 +1084,12 @@ function cellAction() {
         passableDir_E();
         if (input == "look") {
             if (!items[6][1]) {
-                let blockMessage = "(This guy looks creepy. Is he in some kind of cult?)";
+                let blockMessage = "(This guy looks creepy. Is he a member of some kind of cult?)";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
             } else if (!items[6][2]) { //---Blue-Orb--->
-                let blockMessage = "There is a blue orb on the ground!";
+                let blockMessage = "There is a blue orb lying on the ground!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -1131,7 +1131,7 @@ function cellAction() {
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     setTimeout(function() {
-                        blockMessage = "I prepare a ritual for our true god. I´m looking for the Hunter, he somewhere around here.";
+                        blockMessage = "I am preparing a ritual for our true God. I´m looking for the hunter, he is somewhere around here.";
                         chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                         chatWindow.scrollTo(0,chatWindow.scrollHeight);
                         setTimeout(function() {
@@ -1344,7 +1344,7 @@ function blockedPath() {
 }
 
 function nothingToLook() {
-    var blockMessage = "There is nothing interesting...";
+    var blockMessage = "There is nothing interesting here...";
     var reserve = chatWindow.innerHTML;
     chatInput.value = "";
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("red") + "</p>";
@@ -1411,7 +1411,7 @@ function casket() { //caskest && goldenkey
             items[8][2] = true;
             document.getElementById('casket').src='/img/goldenKey.png';
             document.getElementById('casketText').textContent="GoldenKey";
-            let blockMessage = "The code was right. There is a golden key inside.";
+            let blockMessage = "The code was right. There is a golden key inside the casket.";
             chatWindow.innerHTML += "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             drawEventLocation()
@@ -1439,7 +1439,7 @@ function girlName() { //girlname
         npc[1][2] = true;
         setTimeout(function() {
             let npcName = "Guy";
-            blockMessage = "That seems to be right! <br>I found a paper with the numbers 42763. Maybe they are useful.";
+            blockMessage = "That seems to be right! <br>I found a paper with the numbers 42763 written on it. Maybe they are useful.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
         }, 1000);
@@ -1447,7 +1447,7 @@ function girlName() { //girlname
         console.log("Falsch!");
         setTimeout(function() {
             let npcName = "Guy";
-            blockMessage = "I don´t think thats her name...";
+            blockMessage = "I don't think that's her name...";
             chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
         }, 1000);
@@ -1467,7 +1467,7 @@ function hunterLocation() { //hunterLocation
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             setTimeout(function() {
                 let npcName = "Cultist";
-                blockMessage = "Take this orb for your valuable information!";
+                blockMessage = "Take this orb in exchange for your valuable information!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 setTimeout(function() {
@@ -1494,7 +1494,7 @@ function hunterLocation() { //hunterLocation
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 setTimeout(function() {
                     let npcName = "Cultist";
-                    blockMessage = "Take this orb for your valuable information!";
+                    blockMessage = "Take this orb in exchange for your valuable information!";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + npcName.fontcolor("blue") + ": </i></b>" + blockMessage + "</p>";
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     setTimeout(function() {
@@ -1516,7 +1516,7 @@ function bottle() { //bottle & red liquid
 }
 
 function shieldDescription() {
-    var blockMessage = "This shield will save me from an monster´s attack!";
+    var blockMessage = "This shield will save me from a monster´s attack!";
     chatInput.value = "";
     var reserve = chatWindow.innerHTML;
     chatWindow.innerHTML = "<p><b>" + chatWindow.innerHTML + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("blue") + "</p>";
@@ -1657,8 +1657,4 @@ function showItems() {
         items[i][1] = true;
     }
     drawEventLocation();
-}
-
-function test() {
-
 }

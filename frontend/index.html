@@ -52,7 +52,7 @@ button {
 }
 
 .button2 {
-    width: fit-content;
+    width: 150px;
     width: -moz-fit-content;
     padding: 5px 5px;
     font-family: Monaco, monospace;
@@ -60,7 +60,59 @@ button {
     font-size: medium;
 }
 
-table, th, td {
+table.table1{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+}
+
+table.table1 th {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+    width: 150px;
+}
+
+table.table1 td {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+    width: 150px;
+}
+
+table.table2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+}
+
+table.table2 th{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+}
+
+table.table2 td{
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: auto;
@@ -82,9 +134,9 @@ ul {
 
 <div id="homepage">
 
-    <button class="button2" id="login"><a href="/login.html">Log In</a></button>
+    <button class="button2" id="login" onclick="window.location='/login.html'">Log In</button>
     <p id="player" hidden></p><br><br>
-    <button class="button2" id="registrieren"><a href="/registrieren.html">Sign Up</a></button>
+    <button class="button2" id="registrieren" onclick="window.location='/registrieren.html'">Sign Up</button>
     <button class="button2" id="logout" onclick="logoutplayer()" hidden>Log out</button>
 
 
@@ -96,8 +148,7 @@ ul {
     <button id="rangbutton" onclick="showScore()">Ranking</button><br><br>
     <button id="hilfe" onclick="showHelp()">Help</button><br><br>
     <button id="aboutbutton" onclick="displayAbout()">About</button><br><br>
-    <button class="button2" id="dbDelete" onclick="deleteAllDB()">Delete Database</button><br><br>
-    <button class="button2" onclick="window.location='/game.html'">Probeenter</button><br><br>
+    <button id="dbDelete" onclick="deleteAllDB()" hidden>Delete Database</button><br><br>
 
     <p>Please note: Sign up to save your runs and get the possibility to show former runs. 
         Otherwise the details of your run can't be saved.</p> 
@@ -110,11 +161,15 @@ ul {
         <h3>Here you can see what you did in your last playthrough:</h3>
         <p>Legend:</p>
         <div>
-            <table>
+            <table class="table2">
                 <tr><th>Type</th><th>Description</th></tr>
                 <tr><td>x</td><td>your interaction failed in this move</td></tr>
                 <tr><td>o</td><td>your interaction was successful in this move</td></tr>
                 <tr><td>null</td><td>you didn't interact in this move</td></tr>
+                <tr><td>n</td><td>you went north</td></tr>
+                <tr><td>s</td><td>you went south</td></tr>
+                <tr><td>e</td><td>you went east</td></tr>
+                <tr><td>w</td><td>you went west</td></tr>
             </table>
           </div>
         <div id="result"></div>
@@ -127,7 +182,8 @@ ul {
     <h2>Ranking</h2>
     <div>
         <h3>Here you can see where you are in the ranking:</h3>
-        <p>...</p>
+        <div id="score"></div>
+        <div id="message"></div><br><br>
         <button class="button2" id="back" onclick="displayStart()">Back to start</button>
     </div>
 </div>
@@ -135,10 +191,11 @@ ul {
 <div id="help" hidden>
     <h2>How to play:</h2>
     <div>
-        <p>This is a browsergame - so ensure you got a PC to play. 
-            When you hit the start button you will get into the maze where you can move by entering commands into the chat window.
-            You can read up all commands in the game. The goal of the game is to exit the maze by completing the necessary quests.
-            While moving through the maze you can find ang get items and use them at another place. Furthermore you will find some NPCs to talk to and to interact.
+        <p style="margin-right: 200px; margin-left: 200px;">This is a <u>browsergame</u> - so ensure you got a PC to play. 
+            When you hit the start button you will get into the maze where you can move by <u>entering commands</u> into the chat window.
+            You can read up all commands in the game. The goal of the game is to <u>exit the maze</u> by completing the necessary <u>quests</u>.
+            While moving through the maze you can find and get <u>items</u> &#128302 and use them at another place. Furthermore you will find some <u>NPCs</u> &#128107 to talk to and to interact.
+            And don't forget to beware of the <u>monsters</u>! ROOOOAAAR &#128121
         </p>
         <p>Have fun!</p>
         <button class="button2" id="back" onclick="displayStart()">Back to start</button>
@@ -190,6 +247,7 @@ function logoutplayer() {
     document.getElementById('player').hidden = true;
     document.getElementById('registrieren').hidden = false;
     document.getElementById('logout').hidden = true;
+    document.getElementById('dbDelete').hidden = true;
     sessionStorage.clear(); 
 
     let url = new URL(window.location.origin + '/logout');
@@ -204,6 +262,7 @@ function logoutplayer() {
 }
 
 function checkplayer() {
+    console.log(player)
     if (player !== null) {
         document.getElementById('player').innerHTML = 'Logged in as: ' + player;
         document.getElementById('login').hidden = true;
@@ -215,6 +274,11 @@ function checkplayer() {
         document.getElementById('player').hidden = true;
         document.getElementById('registrieren').hidden = false;
         document.getElementById('logout').hidden = true;
+    }
+    if (player === 'Aymara' || player === "Daniel") {
+        document.getElementById('dbDelete').hidden = false;
+    } else {
+        document.getElementById('dbDelete').hidden = true;
     }
 }
 
@@ -254,7 +318,7 @@ async function showHistory() {
     let data = await result.json();
     console.log(data)
     document.getElementById('result').innerHTML = "Result: " + data.ergebnis;
-    var table = "<table>";
+    var table = '<table class="table2">';
     table += "<tr><th>Move</th><th>Look</th><th>Pickup</th><th>Use</th><th>Talk</th><th>Direction</th><th>Position</th></tr>";
     for (var row of data.rows) {
         table += `<tr><td>${row.zuganzahl}</td><td>${row.look}</td><td>${row.pickup}</td>
@@ -267,12 +331,35 @@ async function showHistory() {
 }
 }
 
-function showScore() {
+async function showScore() {
     document.getElementById('rang').hidden = false;
     document.getElementById('history').hidden = true;
     document.getElementById('homepage').hidden = true;
     document.getElementById('about').hidden = true;
     document.getElementById('help').hidden = true;
+
+    var url = new URL(window.location.origin + '/score');
+    let result = await fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: "GET",
+    });
+
+    let counter = 1;
+    let data = await result.json();
+    console.log(data)
+    var table = '<table class="table1">';
+    table += "<tr><th>Place</th><th>Username</th><th>Moves</th><th>Score</th></tr>";
+    for (var row of data.rows) {
+        table += `<tr><td>${counter++}</td><td>${row.username}</td><td>${row.zuganzahl}</td><td>${row.score}</td></tr>`; 
+    }
+    table += "</table>";
+    document.getElementById('score').innerHTML = table;
+    if (player === null) {
+        document.getElementById('message').innerHTML = "You don't have an account - create one to get listed.";
+    }
 }
 
 function showHelp() {
