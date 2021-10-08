@@ -68,6 +68,7 @@ h2 {
     width: 32px;
     height: 32px;
     margin-left: 60px;
+    opacity: 0;
 }
 
 .picright {
@@ -75,6 +76,7 @@ h2 {
     height: 32px;
     margin-right: 60px;
     float: right;
+    opacity: 0;
 }
 
 .spanleft {
@@ -156,4 +158,10 @@ h2 {
     background-color: #181513;
     border-radius: 100%;
     display: inline-block;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+  background-color: #ff4d4d;
+  color: #ff4d4d;
 }

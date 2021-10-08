@@ -60,7 +60,7 @@ function cellAction() {
             if (!items[5][2]) {//---Green-Orb--->
                 items[5][2] = true;
                 scorePoints += 100;
-                document.getElementById('greenOrb').hidden = false;
+                document.getElementById('greenOrb').style.opacity = "1";
                 document.getElementById('greenOrbText').hidden = false;
                 confirm("You got a green orb!");
                 pickupDB = true;
@@ -139,7 +139,7 @@ function cellAction() {
             if (!items[7][2]) {//---Shield--->
                 items[7][2] = true;
                 scorePoints += 100;
-                document.getElementById('shield').hidden = false;
+                document.getElementById('shield').style.opacity = "1";
                 document.getElementById('shieldText').hidden = false;
                 confirm("You got a shield!");
                 pickupDB = true;
@@ -358,6 +358,7 @@ function cellAction() {
                 scorePoints += 300;
                 document.getElementById('bottle').src='/img/redLiquid.png';
                 document.getElementById('bottleText').textContent="RedLiquid";
+                document.getElementById('bottleText').style.paddingRight = "14px"
                 let blockMessage = "I filled the bottle with the red liquid.";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
@@ -461,7 +462,7 @@ function cellAction() {
             if (!items[0][2]) {//---RustyKey--->
                 items[0][2] = true;
                 scorePoints += 100;
-                document.getElementById('rustyKey').hidden = false;
+                document.getElementById('rustyKey').style.opacity = "1";
                 document.getElementById('rustyKeytext').hidden = false;
                 confirm("You got a Rusty Key!");
                 pickupDB = true;
@@ -497,7 +498,7 @@ function cellAction() {
             if (events[0][1] && !items[1][2]) {
                 items[1][2] = true;
                 scorePoints += 100;
-                document.getElementById('doll').hidden = false;
+                document.getElementById('doll').style.opacity = "1";
                 document.getElementById('dollText').hidden = false;
                 confirm("You got a doll!");
                 pickupDB = true;
@@ -838,7 +839,7 @@ function cellAction() {
             if (!items[3][2]) {//---bottle--->
                 items[3][2] = true;
                 scorePoints += 100;
-                document.getElementById('bottle').hidden = false;
+                document.getElementById('bottle').style.opacity = "1";
                 document.getElementById('bottleText').hidden = false;
                 confirm("You got a bottle!");
                 pickupDB = true;
@@ -895,7 +896,7 @@ function cellAction() {
             if (!items[2][2]) {//---Casket--->
                 items[2][2] = true;
                 scorePoints += 100;
-                document.getElementById('casket').hidden = false;
+                document.getElementById('casket').style.opacity = "1";
                 document.getElementById('casketText').hidden = false;
                 confirm("You got a casket!");
                 pickupDB = true;
@@ -977,7 +978,7 @@ function cellAction() {
             if (events[3][1] && !items[4][2]) {
                 items[4][2] = true;
                 scorePoints += 100;
-                document.getElementById('redOrb').hidden = false;
+                document.getElementById('redOrb').style.opacity = "1";
                 document.getElementById('redOrbText').hidden = false;
                 confirm("You got a Red Orb!");
                 pickupDB = true;
@@ -1118,7 +1119,7 @@ function cellAction() {
             if (items[6][1] && !items[6][2]) {
                 items[6][2] = true;
                 scorePoints += 100;
-                document.getElementById('blueOrb').hidden = false;
+                document.getElementById('blueOrb').style.opacity = "1";
                 document.getElementById('blueOrbText').hidden = false;
                 confirm("You got a Blue Orb!");
                 pickupDB = true;

@@ -3,6 +3,7 @@ create table rangliste (
   personId int not NULL,
   zuganzahl int DEFAULT 0,
   score int DEFAULT 0,
+  result VARCHAR(10) DEFAULT NULL check (result in ('won', 'lost')),
   constraint ranking foreign key (personId) REFERENCES personen (personId)
 );
 

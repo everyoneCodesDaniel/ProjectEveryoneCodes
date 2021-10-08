@@ -10,9 +10,6 @@
 </head>
 <body onload="javascript:startMonolog();checkPlayer();">
 
-<audio id="music" controls>
-    <source src="/sound/backgroundMusic.ogg" type="audio/ogg">
-</audio>
 <audio id="monsterSound">
     <source src="/sound/monster.ogg" type="audio/ogg">
 </audio>
@@ -87,33 +84,33 @@
 
 <div id="inventory">
     <h3 style="text-align: center;">Inventory</h3>
-    <img class="picleft" id="rustyKey" src="/img/rustyKey.png" onclick="chatInput.value += ' rustyKey ';document.getElementById('chatInput').focus();" hidden>   
-    <img class="picright" id="doll" src="/img/doll.png" onclick="chatInput.value += ' doll ';document.getElementById('chatInput').focus();" hidden><br>
+    <img class="picleft" id="rustyKey" src="/img/rustyKey.png" onclick="chatInput.value += ' rustyKey ';document.getElementById('chatInput').focus();">   
+    <img class="picright" id="doll" src="/img/doll.png" onclick="chatInput.value += ' doll ';document.getElementById('chatInput').focus();"><br>
     <span class="spanleft" id="rustyKeytext" hidden>RustyKey</span>
-    <span class="spanright" id="dollText" hidden>Doll</span>
+    <span class="spanright" id="dollText" style="padding-right: 56px;" hidden>Doll</span>
     <br><br>
-    <img class="picleft" id="casket" src="/img/casket.png" onclick="casket()" hidden>
-    <img class="picright" id="bottle" src="/img/bottle.png" onclick="bottle()" hidden>
+    <img class="picleft" id="casket" src="/img/casket.png" onclick="casket()" >
+    <img class="picright" id="bottle" src="/img/bottle.png" onclick="bottle()" >
     <br><span class="spanleft" id="casketText" hidden>Casket</span>
-    <span class="spanright" id="bottleText" hidden>Bottle</span>
+    <span class="spanright" id="bottleText" style="padding-right: 40px;" hidden>Bottle</span>
     <br><br>
-    <img class="picleft" id="redOrb" src="/img/redOrb.png" onclick="chatInput.value += ' redOrb ';document.getElementById('chatInput').focus();" hidden>
-    <img class="picright" id="greenOrb" src="/img/greenOrb.png" onclick="chatInput.value += ' greenOrb ';document.getElementById('chatInput').focus();" hidden><br>
+    <img class="picleft" id="redOrb" src="/img/redOrb.png" onclick="chatInput.value += ' redOrb ';document.getElementById('chatInput').focus();" >
+    <img class="picright" id="greenOrb" src="/img/greenOrb.png" onclick="chatInput.value += ' greenOrb ';document.getElementById('chatInput').focus();" ><br>
     <span class="spanleft" id="redOrbText" hidden>Red Orb</span>
-    <span class="spanright" id="greenOrbText" hidden>Green Orb</span>
+    <span class="spanright" id="greenOrbText" style="padding-right: 13px;" hidden>Green Orb</span>
     <br><br>
-    <img class="picleft" id="blueOrb" src="/img/blueOrb.png" onclick="chatInput.value += ' blueOrb ';document.getElementById('chatInput').focus();" hidden>
-    <img class="picright" id="shield" src="/img/shield.png" onclick="shieldDescription()" hidden><br>
+    <img class="picleft" id="blueOrb" src="/img/blueOrb.png" onclick="chatInput.value += ' blueOrb ';document.getElementById('chatInput').focus();" >
+    <img class="picright" id="shield" src="/img/shield.png" onclick="shieldDescription()" ><br>
     <span class="spanleft" id="blueOrbText" hidden>Blue Orb</span>
-    <span class="spanright" id="shieldText" hidden>Shield</span>
-    <br><br><br><br>
+    <span class="spanright" id="shieldText" style="padding-right: 40px;" hidden>Shield</span>
+    <br>
 <div id="help">
     <h3 style="text-align: center;">Help</h3>
     <span class="left">look</span>
     <span class="right">north/n</span><br><br>
-    <span class="left">pick up</span>
+    <span class="left">pickup</span>
     <span class="right">south/s</span><br><br>
-    <span class="left">use</span>
+    <span class="left">use + <em>item</em></span>
     <span class="right">east/e</span><br><br>
     <span class="left">talk</span>
     <span class="right">west/w</span><br>
@@ -125,7 +122,10 @@
     <span class="left"><span class="tree"></span> Tree</span>
     <span class="right">Altar <span class="altar"></span></span><br>
     <span class="left"><span class="pentagramm"></span> Pentagramm</span>
-    <span class="right">Gate <span class="gate"></span></span>
+    <span class="right">Gate <span class="gate"></span></span><br><br>
+    <audio id="music" controls>
+        <source src="/sound/backgroundMusic.ogg" type="audio/ogg">
+    </audio>
 
 </div>
 </div>

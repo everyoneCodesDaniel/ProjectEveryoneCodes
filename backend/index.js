@@ -160,7 +160,7 @@ app.put("/exitgame", async (req, res) => {
         zug = rows[0].zuganzahl
         console.log(zug)
         connection.query("update durchläufe" + personId + " set zuganzahl = " + zug + ", ergebnis = 'lost', score = " + score + " where id = " + detailsid);
-        connection.query("insert into rangliste set personId = " + personId + ", zuganzahl = " + zug +", score = " + score);
+        connection.query("insert into rangliste set personId = " + personId + ", zuganzahl = " + zug +", score = " + score+", result = 'lost'");
         });
         res.send('worked')
     });
@@ -174,7 +174,7 @@ app.put("/wongame", async (req, res) => {
         zug = rows[0].zuganzahl
         console.log(zug)
         connection.query("update durchläufe" + personId + " set zuganzahl = " + zug + ", ergebnis = 'won', score = " + score + " where id = " + detailsid);
-        connection.query("insert into rangliste set personId = " + personId + ", zuganzahl = " + zug +", score = " + score);
+        connection.query("insert into rangliste set personId = " + personId + ", zuganzahl = " + zug +", score = " + score +", result = 'won'");
     });
     res.send('worked')
 });
@@ -363,7 +363,7 @@ app.get("/history/:username", async (req, res) => {
 
 app.get("/score", async (req, res) => {
     try {
-        await dbQuery("SELECT p.username,r.zuganzahl,r.score FROM rangliste r, personen p WHERE r.personId=p.personId ORDER BY score DESC;").then(rows => {
+        await dbQuery("SELECT p.username,r.zuganzahl,r.score,r.result FROM rangliste r, personen p WHERE r.personId=p.personId ORDER BY score DESC;").then(rows => {
         res.send({rows: rows})
         });
     } catch (err) {
