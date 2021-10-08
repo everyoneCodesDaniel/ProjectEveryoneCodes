@@ -351,9 +351,9 @@ async function showScore() {
     let data = await result.json();
     console.log(data)
     var table = '<table class="table1">';
-    table += "<tr><th>Place</th><th>Username</th><th>Moves</th><th>Score</th></tr>";
+    table += "<tr><th>Place</th><th>Username</th><th>Moves</th><th>Result</th><th>Score</th></tr>";
     for (var row of data.rows) {
-        table += `<tr><td>${counter++}</td><td>${row.username}</td><td>${row.zuganzahl}</td><td>${row.score}</td></tr>`; 
+        table += `<tr><td>${counter++}</td><td>${row.username}</td><td>${row.zuganzahl}</td><td>${row.result}</td><td>${row.score}</td></tr>`; 
     }
     table += "</table>";
     document.getElementById('score').innerHTML = table;

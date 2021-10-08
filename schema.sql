@@ -1,11 +1,10 @@
 create table rangliste (
   id int primary key auto_increment,
   personId int not NULL,
-  durchlaufid int not NULL,
   zuganzahl int DEFAULT 0,
   score int DEFAULT 0,
+  result VARCHAR(10) DEFAULT NULL check (result in ('won', 'lost')),
   constraint ranking foreign key (personId) REFERENCES personen (personId),
-  constraint durchlauf foreign key (durchlaufid) REFERENCES durchläufe (id)
 );
 
 create table personen (
