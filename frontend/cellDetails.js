@@ -340,10 +340,17 @@ function cellAction() {
     if ( x == 5 && y == 2) {
         passableDir_SW();
         if (input == "look") {
-            let blockMessage = "A big tree. In front of it there is a red puddle.";
-            chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
-            chatWindow.scrollTo(0,chatWindow.scrollHeight);
-            lookDB = true;
+            if (items[3][2] && !items[3][3]) {
+                let blockMessage = "A big tree. Maybe I can fill my bottle with the red liquid...";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.scrollTo(0,chatWindow.scrollHeight);
+                lookDB = true;
+            } else {
+                let blockMessage = "A big tree. In front of it there is a red puddle that looks like blood.";
+                chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
+                chatWindow.scrollTo(0,chatWindow.scrollHeight);
+                lookDB = true;
+            }
         }
         if (input == "pickup") {
             if (false) {
@@ -575,7 +582,7 @@ function cellAction() {
         passableDir_NSEW();
         if (input == "look") {
             let info = "Info";
-            let blockMessage = "You can use items by clicking on the icon in the inventory.";
+            let blockMessage = "When you click on the icon of the item, the item´s name is written in the chatwindow.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + info.fontcolor("darkyellow") + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -643,7 +650,7 @@ function cellAction() {
         }
         if (input == "look") {
             if (events[4][1] && events[5][1] && events[6][1]) {
-                let blockMessage = "The has opened! This must be the exit!";
+                let blockMessage = "The gate has opened! This must be the exit!";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -963,7 +970,7 @@ function cellAction() {
         passableDir_NSEW();
         if (input == "look") {
             if (!events[3][1]) {
-                let blockMessage = "Who made this huge pentagramm? Do you not need offerings for such rituals?";
+                let blockMessage = "A pentagramm? Maybe I should finish the ritual with an offering or something similar?";
                 chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                 chatWindow.scrollTo(0,chatWindow.scrollHeight);
                 lookDB = true;
@@ -1007,7 +1014,7 @@ function cellAction() {
         passableDir_SW();
         if (input == "look") {
             let info = "Info";
-            let blockMessage = "One needs offerings for certain rituals. Blood or something similar is sufficient.";
+            let blockMessage = "One needs offerings for certain rituals. Blood or something similar is recommended.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + info.fontcolor("darkyellow") + ": </i></b>" + blockMessage + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
             lookDB = true;
@@ -1479,7 +1486,7 @@ function girlName() { //girlname
 }
 
 function hunterLocation() { //hunterLocation
-    let code = prompt("What is the location of hunter?", "X?/Y?");
+    let code = prompt("What is the location of the hunter? \r\nTell me X and Y coordinates in this format, please!", "X0/Y0");
     if (code == "X6/Y2" || code == "x6/y2") {
         console.log("Richtig!");
         npc[3][2] = true;
@@ -1558,6 +1565,7 @@ function shieldDescription() {
 
 function startMonolog() {
     saveInput = !saveInput;
+    alert("Type your commands into the chatwindow. \r\nYou can use the commands from the help window. \r\nExamples: \r\nType 'north' or just 'n' to go in that direction. \r\nType 'use' and the name of an <item> to use it.");
     setTimeout(function () {
         blockMessage = "Uhh... Where am I?";
         chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
@@ -1597,14 +1605,14 @@ function pathMonolog() {
 function hiddenItem() {
     if ( x == 5 && y == 1) { //---Shield--->
         if (!items[7][2]) {
-            let blockMessage = "There is a pile of scrap metal on the ground. Maybe something is useful.";
+            let blockMessage = "There is a pile of scrap metal lying on the ground. Maybe it's something useful.";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("#999900") + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
         }
     }
     if ( x == 1 && y == 3) { //---Rusty-Key--->
         if (!items[0][2]) {
-            let blockMessage = "Is there a piece of metal on the ground?";
+            let blockMessage = "Is there a piece of metal lying on the ground?";
             chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage.fontcolor("#999900") + "</p>";
             chatWindow.scrollTo(0,chatWindow.scrollHeight);
         }
@@ -1756,7 +1764,7 @@ function monsterAttack() {
                 slash.play();
                 setTimeout(function() {
                     splat.play();
-                    let blockMessage = "Damn....<br>I think thats the end....";
+                    let blockMessage = "Damn....<br>I think that's the end....";
                     chatWindow.innerHTML += "<p><b>" + "<i> " + username + ": </i></b>" + blockMessage + "</p>";
                     chatWindow.scrollTo(0,chatWindow.scrollHeight);
                     setTimeout(function() {
@@ -1772,7 +1780,7 @@ function monsterAttack() {
 }
 
 function allOrbs() {
-    confirm("A path has opened! Maybe I can leave this maze now!");
+    alert("A path has opened! Maybe I can leave this maze now!");
 }
 
 function uncover() {

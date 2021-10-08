@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="game.css">
 
 </head>
-<body onload="javascript:startMonolog();checkPlayer();">
+<body onload="startMonolog();checkPlayer();">
 
 <audio id="monsterSound">
     <source src="/sound/monster.ogg" type="audio/ogg">
@@ -110,7 +110,7 @@
     <span class="right">north/n</span><br><br>
     <span class="left">pickup</span>
     <span class="right">south/s</span><br><br>
-    <span class="left">use + <em>item</em></span>
+    <span class="left">use <em>item</em></span>
     <span class="right">east/e</span><br><br>
     <span class="left">talk</span>
     <span class="right">west/w</span><br>
@@ -142,7 +142,6 @@
 </div>
 <button id="uncover" onclick="uncover()" hidden>Uncover</button>
 <button id="showall" onclick="showItems()" hidden>Show all items</button>
-<button id="test" onclick="test()" hidden>Test</button>
 <button id="exit" onclick="exitGame()" hidden>Exit</button>
 <button id="won" onclick="wonGame()" hidden>Won</button>
 </div>
@@ -182,13 +181,11 @@
         if (player === 'Aymara' || player === "Daniel") {
             document.getElementById('uncover').hidden = false;
             document.getElementById('showall').hidden = false;
-            document.getElementById('test').hidden = false;
             document.getElementById('exit').hidden = false;
             document.getElementById('won').hidden = false;
         } else {
             document.getElementById('uncover').hidden = true;
             document.getElementById('showall').hidden = true;
-            document.getElementById('test').hidden = true;
             document.getElementById('exit').hidden = true;
             document.getElementById('won').hidden = true;
         }
@@ -282,6 +279,7 @@
             }
         }
     }
+    
     function incorrectInput() {
         var blockMessage = "Not a valid input!";
         chatInput.value = "";
@@ -361,7 +359,7 @@
                 eventX = (canvas.node.width / 6 ) * 1 - 60;
                 eventY = (canvas.node.height / 6 ) * 1 - 95;
                 circlefillColor = '#FF0000'; 
-                radius = 10;
+                radius = 7;
                 fillCircle(eventX, eventY, radius, circlefillColor);
             }
         }
@@ -375,7 +373,7 @@
                 eventX = (canvas.node.width / 6 ) * 6 - 60;
                 eventY = (canvas.node.height / 6 ) * 1 - 95;
                 circlefillColor = '#00FF00'; 
-                radius = 10;
+                radius = 7;
                 fillCircle(eventX, eventY, radius, circlefillColor);
             }
         }
@@ -389,7 +387,7 @@
                 eventX = (canvas.node.width / 6 ) * 4 - 60;
                 eventY = (canvas.node.height / 6 ) * 4 - 95;
                 circlefillColor = '#0000FF'; 
-                radius = 10;
+                radius = 7;
                 fillCircle(eventX, eventY, radius, circlefillColor);
             }
         }
@@ -471,14 +469,14 @@
             }
         }
         //----------------------------Items-------------------------->
-        if (items[0][1] && document.getElementById('rustyKey').hidden == true) { //Key1
+        if (items[0][1] && document.getElementById('rustyKeytext').hidden == true) { //Key1
             eventX = (canvas.node.width / 6 ) * 1 - 90;
             eventY = (canvas.node.height / 6 ) * 3 - 30;
             circlefillColor = '#FFD700'; 
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        if (events[0][1] && document.getElementById('doll').hidden == true) { //doll
+        if (events[0][1] && document.getElementById('dollText').hidden == true) { //doll
             eventX = (canvas.node.width / 6 ) * 2 - 60;
             eventY = (canvas.node.height / 6 ) * 3 - 95;
             circlefillColor = '#FFD700'; 
@@ -506,21 +504,21 @@
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        if (items[2][1] && document.getElementById('casket').hidden == true) { //Casket
+        if (items[2][1] && document.getElementById('casketText').hidden == true) { //Casket
             eventX = (canvas.node.width / 6 ) * 2 - 90;
             eventY = (canvas.node.height / 6 ) * 5 - 30;
             circlefillColor = '#FFD700'; 
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        if (items[7][1] && document.getElementById('shield').hidden == true) { //Shield
+        if (items[7][1] && document.getElementById('shieldText').hidden == true) { //Shield
             eventX = (canvas.node.width / 6 ) * 5 - 90;
             eventY = (canvas.node.height / 6 ) * 1 - 30;
             circlefillColor = '#FFD700'; 
             radius = 10;
             fillCircle(eventX, eventY, radius, circlefillColor);
         }
-        if (items[3][1] && document.getElementById('bottle').hidden == true) { //bottle
+        if (items[3][1] && document.getElementById('bottleText').hidden == true) { //bottle
             eventX = (canvas.node.width / 6 ) * 6 - 90;
             eventY = (canvas.node.height / 6 ) * 4 - 30;
             circlefillColor = '#FFD700'; 
